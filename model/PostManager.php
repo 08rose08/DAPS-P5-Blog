@@ -21,18 +21,17 @@ class PostManager extends Manager
          * $req->setFetchMode(PDO::FETCH_CLASS, 'Post');
          * $post = $req->fetch()
          */
-
-        return $posts;
         
+        return $posts;  
     }
 
-    /**public function getOnePost($postId)
+    public function getOnePost($id)
     {
         $db = $this->dbConnect();
-        $req = $db->prepare('SELECT post.id, post.id_author, post.title, post.content, DATE_FORMAT(post.last_update_date, \'%d/%m/%Y à %Hh%imin%ss\') AS last_update_date_fr, user.name FROM post JOIN user ON post.id_author = user.id WHERE id = ?');
-        $req->execute(array($postId));
-        $post = $req->fetch();
-
+        $req = $db->prepare('SELECT post.id, post.id_author, post.title, post.content, post.chapo, DATE_FORMAT(post.last_update_date, \'%d/%m/%Y à %Hh%imin%ss\') AS last_update_date, user.name FROM post JOIN user ON post.id_author = user.id WHERE post.id = ?');
+        $req->execute(array($id));
+        $data = $req->fetch();
+        $post = new Post($data);
         return $post;
-    }**/
+    }
 }

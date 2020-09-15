@@ -16,4 +16,10 @@ class PostController
         //print_r($posts);
         require 'view/listPostsView.php';
     }
+    function getOnePost($id)
+    {
+        $postManager = new PostManager;
+        $post = $postManager->getOnePost($id);
+        require 'view/postView.php';
+    }
 }
