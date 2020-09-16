@@ -17,10 +17,10 @@ try {
                 break;
             case 'getOnePost':
                 if (isset($_GET['id']) && $_GET['id'] > 0){
-                    $postController = new PostController;
-                    $getOnePost = $postController->getOnePost($_GET['id']);
                     $commentController = new CommentController;
                     $getComments = $commentController->getComments($_GET['id']);
+                    $postController = new PostController;
+                    $getOnePost = $postController->getOnePost($_GET['id'], $getComments);
                 }else{
                     throw new Exception('Aucun id de post encoyé');
                 }

@@ -16,7 +16,7 @@ class PostController
         //print_r($posts);
         require 'view/listPostsView.php';
     }
-    function getOnePost($id)
+    function getOnePost($id, $comments)
     {
         $postManager = new PostManager;
         $post = $postManager->getOnePost($id);

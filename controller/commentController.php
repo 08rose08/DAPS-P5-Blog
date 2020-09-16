@@ -8,6 +8,7 @@ class CommentController
     {
         $commentManager = new CommentManager;
         $comments = $commentManager->getComments($id);
-        require 'view/commentsView.php';
+        //require 'view/commentsView.php';
+        return $comments;
     }
 }
