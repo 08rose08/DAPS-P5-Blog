@@ -10,7 +10,7 @@
 foreach ($posts as $post){
 ?>
     
-    <h2><?php echo $post->title() ?></h2>
+    <h2><a href='index.php?action=getOnePost&amp;id=<?php echo $post->id() ?>'><?php echo $post->title() ?></a></h2>
     <p><?php echo $post->chapo() ?></p>
     <p>Par <?php echo $post->name() ?> le <?php echo $post->last_update_date() ?></p>
 
