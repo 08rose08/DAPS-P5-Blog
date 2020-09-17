@@ -10,4 +10,4 @@ foreach ($comments as $comment){
 
 <?php } ?>
 
-<?php include 'commentFormView.php'; ?>
+<?php include 'addCommentView.php'; ?>

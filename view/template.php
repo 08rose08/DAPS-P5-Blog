@@ -54,7 +54,7 @@
 
         <!-- Footer-->
         <footer class="footer bg-black small text-center text-white-50">
-            <div class="container">Copyright © Your Website 2020</div>
+            <div class="container">Copyright © ThePinkMuffin 2020</div>
         </footer>
 
         <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes)-->

@@ -34,4 +34,36 @@ class PostManager extends Manager
         $post = new Post($data);
         return $post;
     }
+
+    public function addPost($dataPost)
+    {
+        echo 'début du manager';
+
+        $data = array(
+            'id_author' => /*$dataPost['id_author']*/1,
+            'title' => $dataPost['title'],
+            'content'=> $dataPost['content'],
+            'chapo' => $dataPost['chapo']
+        );
+        echo 'après le array';
+
+        $post = new Post($data);
+        var_dump($post);
+        var_dump($post->title());
+
+        $db = $this->dbConnect();
+        $addPost = $db->prepare('INSERT INTO post VALUES (NULL, :id_author, :title, :content, NOW(), :chapo)');
+        $addPost->bindValue(':id_author', $post->id_author());
+        $addPost->bindValue(':title', $post->title());
+        $addPost->bindValue(':content', $post->content());
+        $addPost->bindValue(':chapo', $post->chapo());
+
+        echo 'après la préparation';
+
+        $affectedLines = $addPost->execute();
+
+        var_dump($affectedLines);
+
+        return $affectedLines;
+    }
 }

@@ -1,6 +1,6 @@
 <?php
 
-require 'model/PostManager.php';
+require_once 'model/PostManager.php';
 
 class PostController
 {
@@ -20,6 +20,22 @@ class PostController
     {
         $postManager = new PostManager;
         $post = $postManager->getOnePost($id);
+        
         require 'view/postView.php';
+    }
+    function writePost()
+    {
+        require 'view/addPostView.php';
+    }
+    function addPost($dataPost)
+    {
+        $postManager = new PostManager;
+        $affectedLines = $postManager->addPost($dataPost); //???
+
+        if ($affectedLines === false) {
+            throw new Exception('Impossible d\'ajouter le post!');
+        }else{
+            header('Location: index.php?action=getPosts');
+        }
     }
 }
