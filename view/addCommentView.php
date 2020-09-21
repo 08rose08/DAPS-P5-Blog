@@ -11,23 +11,18 @@
       </div>
       <div class="modal-body">
 
-
-        <form>
+        <form method="post" action="index.php?action=addComment&amp;id=<?php echo $_GET['id'] ?>">
             <div class="form-group">
                 <label for="name">Name</label>
                 <input type="text" class="form-control" id="name" required data-validation-required-message="Veuillez écrire votre nom svp.">
             </div>
             <div class="form-group">
                 <label for="content">Commentaire</label>
-                <textarea class="form-control" id="content" rows="3" required data-validation-required-message="Veuillez écrire votre commentaire svp."></textarea>
+                <textarea class="form-control" name="content" id="content" rows="3" required data-validation-required-message="Veuillez écrire votre commentaire svp."></textarea>
             </div>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+            <button type="submit" class="btn btn-primary">Envoyer</button>
         </form>
-      
-    
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-        <button type="button" class="btn btn-primary">Envoyer</button>
       </div>
     </div>
   </div>

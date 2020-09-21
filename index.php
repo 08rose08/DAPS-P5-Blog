@@ -33,14 +33,22 @@ try {
                 break;
 
             case 'addPost':
-                if (/*isset($_POST['id_author']) && */isset($_POST['title']) && isset($_POST['content']) && isset($_POST['chapo'])){
+                if (/*isset($_POST['id_author'])*/isset($_POST['title']) && isset($_POST['content']) && isset($_POST['chapo'])){
                     $controller = new PostController;
                     $addPost = $controller->addPost($_POST);
                 }else{
                     throw new Exception('Donnée.s manquante.s');
                 }
                 break;
-            
+            case 'addComment':
+                if (/*isset($_POST['id_author']) &&  isset($_GET['id]) && */isset($_POST['content'])){
+                    $controller = new CommentController;
+                    var_dump($_POST);
+                    $addComment = $controller->addComment($_POST, $_GET['id']);
+                }else{
+                    throw new Exception('Pas de commentaire envoyé');
+                }
+                break;
         }
     }
 }

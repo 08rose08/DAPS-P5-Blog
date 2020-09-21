@@ -21,8 +21,8 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 mx-auto">
-                <!--<img class="masthead-avatar mb-5" src="public/img/profil.png" alt="Photo de profil de Rose Naudin" style="border-radius: 50%;" />
--->
+                <<img class="masthead-avatar img-fluid mb-5" src="public/img/profil.png" alt="Photo de profil de Rose Naudin" style="border-radius: 50%;" />
+
                 <h2 class="text-white mb-4">About</h2>
                 <p class="text-white-50">
                     Grayscale is a free Bootstrap theme created by Start Bootstrap. It can be yours right now, simply download the template on
@@ -38,6 +38,7 @@
 <!-- Projects-->
 <section class="projects-section bg-light" id="projects">
     <div class="container">
+        <h2 class="text-center mb-4">Projects</h2>
         <!-- Featured Project Row-->
         <div class="row align-items-center no-gutters mb-4 mb-lg-5">
             <div class="col-xl-8 col-lg-7"><img class="img-fluid mb-3 mb-lg-0" src="public/img/bg-masthead.jpg" alt="" /></div>
@@ -50,7 +51,7 @@
         </div>
         <!-- Project One Row-->
         <div class="row justify-content-center no-gutters mb-5 mb-lg-0">
-            <div class="col-lg-6"><img class="img-fluid" src="public/img/demo-image-01.jpg" alt="" /></div>
+            <div class="col-lg-6"><img class="img-gray img-fluid" src="public/img/films.png" alt="" /></div>
             <div class="col-lg-6">
                 <div class="bg-black text-center h-100 project">
                     <div class="d-flex h-100">
@@ -69,7 +70,7 @@
         </div>
         <!-- Project Two Row-->
         <div class="row justify-content-center no-gutters">
-            <div class="col-lg-6"><img class="img-fluid" src="public/img/demo-image-02.jpg" alt="" /></div>
+            <div class="col-lg-6"><img class="img-gray img-fluid" src="public/img/chalets.png" alt="" /></div>
             <div class="col-lg-6 order-lg-first">
                 <div class="bg-black text-center h-100 project">
                     <div class="d-flex h-100">
@@ -122,6 +123,10 @@
                             <textarea class="form-control" id="message" rows="5" placeholder="Message" required="required" data-validation-required-message="Please enter a message."></textarea>
                             <p class="help-block text-danger"></p>
                         </div>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="confidentialite" required>
+                        <label class="form-check-label text-white" for="confidentialite">J'ai lu et j'accepte la politique de confidentialité.</label>
                     </div>
                     <br />
                     <div id="success"></div>

@@ -473,6 +473,13 @@ mark,
   content: "— ";
 }
 
+.img-gray {
+  filter: grayscale(100%);
+}
+.img-gray:hover {
+  filter: grayscale(0%);
+}
+
 .img-fluid {
   max-width: 100%;
   height: auto;
