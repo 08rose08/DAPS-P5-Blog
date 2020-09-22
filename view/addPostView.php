@@ -1,14 +1,9 @@
 <?php $title = 'Mon blog : écrire un post'; ?>
+<?php $page = 'Nouveau post'; ?>
+
 
 <?php ob_start(); ?>
-<header class="masthead-list">
-    <div class="container d-flex h-20 align-items-center">
-        
-        <div class="mx-auto text-center">
-            <h1 class="mx-auto text-uppercase">Ecrire un nouveau post</h1>
-        </div>
-    </div>
-</header>
+
 <main class="bg-black p-3 text-white-50">
     <form method="post" action="index.php?action=addPost" class="mx-lg-5">
         <div class="form-group">

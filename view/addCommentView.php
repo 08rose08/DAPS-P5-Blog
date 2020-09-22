@@ -9,9 +9,9 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
 
-        <form method="post" action="index.php?action=addComment&amp;id=<?php echo $_GET['id'] ?>">
+      <div class="modal-body">
+        <form method="post" action="index.php?action=addComment&amp;id=<?= $_GET['id'] ?>">
             <div class="form-group">
                 <label for="name">Name</label>
                 <input type="text" class="form-control" id="name" required data-validation-required-message="Veuillez écrire votre nom svp.">

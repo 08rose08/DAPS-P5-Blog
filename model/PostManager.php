@@ -10,7 +10,7 @@ class PostManager extends Manager
     {
         $posts = [];
         $db = $this->dbConnect();
-        $req = $db->query('SELECT post.id, post.id_author, post.title, post.content, post.chapo, DATE_FORMAT(post.last_update_date, \'%d/%m/%Y à %Hh%imin%ss\') AS last_update_date, user.name FROM post JOIN user ON post.id_author = user.id ORDER BY last_update_date DESC');
+        $req = $db->query('SELECT post.id, post.id_author, post.title, post.content, post.chapo, DATE_FORMAT(post.last_update_date, \'%d/%m/%Y à %Hh%imin%ss\') AS last_update_date, user.username FROM post JOIN user ON post.id_author = user.id ORDER BY last_update_date DESC');
         
         while ($data = $req->fetch(PDO::FETCH_ASSOC))
         {
@@ -37,19 +37,14 @@ class PostManager extends Manager
 
     public function addPost($dataPost)
     {
-        echo 'début du manager';
-
         $data = array(
             'id_author' => /*$dataPost['id_author']*/1,
             'title' => $dataPost['title'],
             'content'=> $dataPost['content'],
             'chapo' => $dataPost['chapo']
         );
-        echo 'après le array';
 
         $post = new Post($data);
-        var_dump($post);
-        var_dump($post->title());
 
         $db = $this->dbConnect();
         $addPost = $db->prepare('INSERT INTO post VALUES (NULL, :id_author, :title, :content, NOW(), :chapo)');
@@ -58,11 +53,8 @@ class PostManager extends Manager
         $addPost->bindValue(':content', $post->content());
         $addPost->bindValue(':chapo', $post->chapo());
 
-        echo 'après la préparation';
 
         $affectedLines = $addPost->execute();
-
-        var_dump($affectedLines);
 
         return $affectedLines;
     }

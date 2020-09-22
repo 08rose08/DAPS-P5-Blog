@@ -22,22 +22,30 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
             <div class="container">
-                <a class="navbar-brand nav-link js-scroll-trigger" href="index.php#page-top">Home</a>
+                <a class="navbar-brand nav-link js-scroll-trigger" href="index.php#index-header">Home</a>
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
                     <i class="fas fa-bars"></i>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php#about">About</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php#projects">Projects</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php#contact">Contact</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php?action=getPosts">Blog</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php?action=showSignup">Signup</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php?action=showLogin">Login</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="public/CV_NaudinR-en.pdf" target="_blank">CV</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
+
+        <header class="masthead-list">
+            <div class="container d-flex h-20 align-items-center">
+        
+                <div class="mx-auto text-center">
+                    <h1 class="mx-auto text-uppercase"><?= $page ?></h1>
+                </div>
+            </div>
+        </header>
 
         <?= $content ?>
 

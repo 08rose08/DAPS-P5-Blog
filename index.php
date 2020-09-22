@@ -41,7 +41,7 @@ try {
                 }
                 break;
             case 'addComment':
-                if (/*isset($_POST['id_author']) &&  isset($_GET['id]) && */isset($_POST['content'])){
+                if (/*isset($_POST['id_author']) &&  isset($_GET['id']) && */isset($_POST['content'])){
                     $controller = new CommentController;
                     var_dump($_POST);
                     $addComment = $controller->addComment($_POST, $_GET['id']);
@@ -49,6 +49,15 @@ try {
                     throw new Exception('Pas de commentaire envoyé');
                 }
                 break;
+            case 'showSignup':
+                $controller = new UserController;
+                $showSignup = $controller->showForm();
+                break;
+            case 'signup':
+                $controller = new UserController;
+                $signup = $controller->signup();
+                break;
+
         }
     }
 }
