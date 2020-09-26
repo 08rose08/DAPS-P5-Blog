@@ -17,6 +17,7 @@ class UserManager extends Manager
                 'password'=> $passHash,
             );
             $user = new User($data);
+
             $db = $this->dbConnect();
             $addUser = $db->prepare('INSERT INTO user VALUES (NULL, :username, :pass, 0)');
             $addUser->bindValue(':username', $user->username());
@@ -42,5 +43,18 @@ class UserManager extends Manager
 
         }
 
+    }
+    public function login()
+    {
+        $db = $this->dbConnect();
+        $req = $db->prepare('SELECT * FROM user WHERE username = ?');
+        $req->execute(array($_POST['username']));
+        $data = $req->fetch();
+        
+        $user = new User($data);
+
+        return $user;
+
+        
     }
 }

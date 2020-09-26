@@ -1,12 +1,17 @@
 <?php
 
 require_once 'model/UserManager.php';
+require_once 'model/User.php';
 
 class UserController
 {
-    public function showForm()
+    public function showFormSignup()
     {
         require 'view/signupView.php';
+    }
+    public function showFormLogin()
+    {
+        require 'view/loginView.php';
     }
     public function signup()
     {
@@ -26,6 +31,33 @@ class UserController
         }else{
             throw new Exception('Incomplete form');
 
+        }
+    }
+    public function login ()
+    {
+        if(isset($_POST['username']) && isset($_POST['password'])){
+            $userManager = new UserManager;
+            $user = $userManager->login();
+            
+
+            $isPasswordCorrect = password_verify($_POST['password'], $user->pass());
+
+            if (!$user) {
+                throw new Exception('Mauvais identifiant ou mot de passe !');
+
+            }else{
+                if ($isPasswordCorrect) {
+                    session_start();
+                    $_SESSION['id'] = $user->id();
+                    $_SESSION['username'] = $user->username();
+                    $_SESSION['admin'] = $user->admin();
+                    
+                    header('Location: index.php?action=getPosts');
+                    
+                }else{
+                    throw new Exception('Mauvais identifiant ou mot de passe !');
+                }
+            }        
         }
     }
 }

@@ -4,7 +4,7 @@ class User
 {
     private $_id,
             $_username,
-            $_password,
+            $_pass,
             $_admin;
 
     public function __construct(array $data) //Qd je fais new Post(['title' => $_Post['title']]), va être appelé par addPost() 
@@ -34,9 +34,9 @@ class User
     {
         return $this->_username;
     }
-    public function password()
+    public function pass()
     {
-        return $this->_password;
+        return $this->_pass;
     }
     public function admin()
     {
@@ -60,11 +60,11 @@ class User
             $this->_username = $username;
         }
     }
-    public function setPassword($password)
+    public function setPass($pass)
     {
-        if (is_string($password)) //is_string ??
+        if (is_string($pass)) //is_string ??
         {
-            $this->_password = $password;
+            $this->_pass = $pass;
         }
     }
     public function setAdmin($admin)

@@ -51,12 +51,19 @@ try {
                 break;
             case 'showSignup':
                 $controller = new UserController;
-                $showSignup = $controller->showForm();
+                $showSignup = $controller->showFormSignup();
                 break;
             case 'signup':
                 $controller = new UserController;
                 $signup = $controller->signup();
                 break;
+            case 'showLogin':
+                $controller = new UserController;
+                $showLogin = $controller->showFormLogin();
+                break;
+            case 'login':
+                $controller = new UserController;
+                $login = $controller->login();
 
         }
     }
