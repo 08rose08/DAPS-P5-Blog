@@ -35,13 +35,13 @@ class PostManager extends Manager
         return $post;
     }
 
-    public function addPost($dataPost)
+    public function addPost()
     {
         $data = array(
-            'id_author' => /*$dataPost['id_author']*/1,
-            'title' => $dataPost['title'],
-            'content'=> $dataPost['content'],
-            'chapo' => $dataPost['chapo']
+            'id_author' => $_SESSION['id'],
+            'title' => $_POST['title'],
+            'content'=> $_POST['content'],
+            'chapo' => $_POST['chapo']
         );
 
         $post = new Post($data);

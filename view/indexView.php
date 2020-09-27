@@ -5,7 +5,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="Rose Naudin" />
-        <title>Mon blog</title>
+        <title>Rose Naudin</title>
+        <meta property="og:title" content="Rose Naudin - Web developer" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="http://naudin-rose.com" />
+        <meta property="og:image" content="http://naudin-rose.com/public/img/apercu.png" />
+        <meta property="og:description" content="Web Developer looking for new opportunities around Stockholm" />
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="public/img/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
@@ -62,9 +67,10 @@
 
                         <h2 class="text-white mb-4">About</h2>
                         <p class="text-white-50">
-                            Grayscale is a free Bootstrap theme created by Start Bootstrap. It can be yours right now, simply download the template on
-                            <a href="https://startbootstrap.com/template-overviews/grayscale/">the preview page</a>
-                            . The theme is open source, and you can use it for any purpose, personal or commercial.
+                            Hi ! I am Rose, I live in Stockholm and I am a web developer. As much Front-end as Back-end, several small projects allowed me to be comfortable in HTML, CSS (Sass, Bootstrap, Bulma, ...), Javascript (Vue.js (front) + Node. js (back)), PHP and SQL.
+                            In constant learning, I continue to develop my skills on a daily basis through volunteering. Up to date on recent technologies, I am therefore able to provide a reliable and modern service.<br>
+                            Besides the code, I love cooking, sharing tea with friends, walking around Stockholm and I have a boat license.<br>
+                            Feel free to contact me!
                         </p>
                     </div>
                 </div>
@@ -75,25 +81,20 @@
         <!-- Projects-->
         <section class="projects-section bg-light" id="projects">
             <div class="container">
-                <h2 class="text-center mb-4">Projects</h2>
-                <!-- Featured Project Row-->
-                <div class="row align-items-center no-gutters mb-4 mb-lg-5">
-                    <div class="col-xl-8 col-lg-7"><img class="img-fluid mb-3 mb-lg-0" src="public/img/bg-masthead.jpg" alt="" /></div>
-                    <div class="col-xl-4 col-lg-5">
-                        <div class="featured-text text-center text-lg-left">
-                            <h4>Github</h4>
-                            <p class="text-black-50 mb-0">Grayscale is open source and MIT licensed. This means you can use it for any project - even commercial projects! Download it, customize it, and publish your website!</p>
-                        </div>
-                    </div>
+                <h2 class="text-center mb-5">Projects</h2>
+                <!--App dev-->
+                <div class="project-text p-0 mb-4">
+                    <h3 class="text-center">App developer - PHP/Symfony</h3>
+                    <hr class="w-25" />
                 </div>
                 <!-- Project One Row-->
                 <div class="row justify-content-center no-gutters mb-5 mb-lg-0">
-                    <div class="col-lg-6"><img class="img-gray img-fluid" src="public/img/films.png" alt="" /></div>
+                    <div class="col-lg-6"><img class="img-gray img-fluid" src="public/img/films.png" alt="screen du site Les Films de Plein Air" /></div>
                     <div class="col-lg-6">
                         <div class="bg-black text-center h-100 project">
                             <div class="d-flex h-100">
                                 <div class="project-text w-100 my-auto text-center text-lg-left">
-                                    <h4 class="text-white">Les Films de Plein Air</h4>
+                                    <h4 class="text-white"><a href="http://naudin-rose.com/filmsdepleinair/"  target="_blank">Les Films de Plein Air</a></h4>
                                     <p class="mb-0 text-white-50">
                                     Choose a suitable technical solution among the existing solutions if it is relevant,
                                     list the features requested by a customer,
@@ -107,12 +108,12 @@
                 </div>
                 <!-- Project Two Row-->
                 <div class="row justify-content-center no-gutters">
-                    <div class="col-lg-6"><img class="img-gray img-fluid" src="public/img/chalets.png" alt="" /></div>
+                    <div class="col-lg-6"><img class="img-gray img-fluid" src="public/img/chalets.png" alt="screen du site Chalets et caviar" /></div>
                     <div class="col-lg-6 order-lg-first">
                         <div class="bg-black text-center h-100 project">
                             <div class="d-flex h-100">
                                 <div class="project-text w-100 my-auto text-center text-lg-right">
-                                    <h4 class="text-white">Chalets et caviar</h4>
+                                    <h4 class="text-white"><a href="http://naudin-rose.com/chaletsetcaviar/"  target="_blank">Chalets et caviar</a></h4>
                                     <p class="mb-0 text-white-50">
                                         Adapt a Wordpress theme to meet customer requirements,
                                         write documentation for non-specialist users,
@@ -123,6 +124,50 @@
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <!--Web deb-->
+                <div class="project-text p-0 mt-5 mb-4">
+                    <h3 class="text-center">Web developer</h3>
+                    <hr class="w-25" />
+                </div>
+                <div id="carousel" class="carousel slide border" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#carousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#carousel" data-slide-to="1"></li>
+                        <li data-target="#carousel" data-slide-to="2"></li>
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img class="d-block w-100 img-gray" src="public/img/orinoco.png" alt="Orinoco">
+                            <div class="carousel-caption d-none d-md-block bg-black text-white-50 w-100">
+                                <h5><a href="https://github.com/08rose08/Orinoco"  target="_blank">Orinoco - Front-end</a></h5>
+                                <p>Build an e-commerce site - HTML/CSS/Boostrap/JavaScript</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img class="d-block w-100 img-gray" src="public/img/sopekocko.png" alt="So Pekocko">
+                            <div class="carousel-caption d-none d-md-block bg-black text-white-50 w-100">
+                                <h5><a href="https://github.com/08rose08/So-Pekocko"  target="_blank">So Pekocko - Back-end</a></h5>
+                                <p>Build a secure API for a gastronomic opinion application - Node.js/MongoDB/Express/OWASP</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img class="d-block w-100 img-gray" src="public/img/groupomania.png" alt="Groupomania"> 
+                            <div class="carousel-caption d-none d-md-block bg-black text-white-50 w-100">
+                                <h5><a href="https://github.com/08rose08/P7-Groupomania"  target="_blank">Groupomania - Front- + Back-end</a></h5>
+                                <p>Create a corporate social network - HTML/Sass/Javascript/Vue.js/Node.js/SQL</p>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
                 </div>
             </div>
         </section>
@@ -188,6 +233,7 @@
         <!-- Footer-->
         <footer class="footer bg-black small text-center text-white-50">
             <div class="container">Copyright © ThePinkMuffin 2020</div>
+            
         </footer>
 
         <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes)-->

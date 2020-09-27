@@ -5,26 +5,25 @@ require 'Comment.php';
 
 class CommentManager extends Manager
 {
-    public function getComments($id)
+    public function getComments()
     {
         $comments = [];
         $db = $this->dbConnect();
-        $req = $db->prepare('SELECT comment.id, comment.id_post, comment.id_author, comment.content, DATE_FORMAT(comment.creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date, user.name FROM comment JOIN user ON comment.id_author = user.id WHERE comment.id_post = ? ORDER BY creation_date DESC');
-        $req->execute(array($id));
+        $req = $db->prepare('SELECT comment.id, comment.id_post, comment.id_author, comment.content, DATE_FORMAT(comment.creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date, user.username FROM comment JOIN user ON comment.id_author = user.id WHERE comment.id_post = ? ORDER BY creation_date DESC');
+        $req->execute(array($_GET['id']));
 
         while ($data = $req->fetch(PDO::FETCH_ASSOC))
         {
             $comments[] = new Comment($data);
         }
-        
-        return $comments;  
+        return $comments; 
     }
-    public function addComment($dataComment, $id_post)
+    public function addComment()
     {
         $data = array(
-            'id_author' => /*$dataComment['id_author']*/1,
-            'content'=> $dataComment['content'],
-            'id_post' => $id_post
+            'id_author' => $_SESSION['id'],
+            'content'=> $_POST['content'],
+            'id_post' => $_GET['id']
         );
 
         $comment = new Comment($data);

@@ -6108,7 +6108,7 @@ a.close.disabled {
   margin-left: 3px;
   text-indent: -999px;
   cursor: pointer;
-  background-color: #fff;
+  background-color: #64a19d;
   background-clip: padding-box;
   border-top: 10px solid transparent;
   border-bottom: 10px solid transparent;
@@ -6126,9 +6126,9 @@ a.close.disabled {
 
 .carousel-caption {
   position: absolute;
-  right: 15%;
+  /*right: 15%;*/
   bottom: 20px;
-  left: 15%;
+  /*left: 15%;*/
   z-index: 10;
   padding-top: 20px;
   padding-bottom: 20px;
@@ -6325,6 +6325,9 @@ button.bg-black:focus {
 
 .border {
   border: 1px solid #dee2e6 !important;
+}
+.border-big {
+  border-width: 0.25rem !important;
 }
 
 .border-top {
@@ -10343,7 +10346,7 @@ body {
 }
 
 .projects-section {
-  padding: 10rem 0;
+  padding: 7rem 0;
 }
 .projects-section .featured-text {
   padding: 2rem;

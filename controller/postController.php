@@ -16,10 +16,10 @@ class PostController
         //print_r($posts);
         require 'view/listPostsView.php';
     }
-    function getOnePost($id, $comments)
+    function getOnePost($comments)
     {
         $postManager = new PostManager;
-        $post = $postManager->getOnePost($id);
+        $post = $postManager->getOnePost($_GET['id']);
         
         require 'view/postView.php';
     }
@@ -27,15 +27,20 @@ class PostController
     {
         require 'view/addPostView.php';
     }
-    function addPost($dataPost)
+    function addPost()
     {
-        $postManager = new PostManager;
-        $affectedLines = $postManager->addPost($dataPost); //???
+        if (isset($_SESSION['id']) && isset($_POST['title']) && isset($_POST['content']) && isset($_POST['chapo'])){
 
-        if ($affectedLines === false) {
-            throw new Exception('Impossible d\'ajouter le post!');
+            $postManager = new PostManager;
+            $affectedLines = $postManager->addPost(); //???
+            if ($affectedLines === false) {
+                throw new Exception('Impossible d\'ajouter le post!');
+            }else{
+                header('Location: index.php?action=getPosts');
+            }
         }else{
-            header('Location: index.php?action=getPosts');
+            throw new Exception('Donnée.s manquante.s');
         }
+
     }
 }

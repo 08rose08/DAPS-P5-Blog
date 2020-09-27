@@ -4,7 +4,7 @@ class Comment
 {
     private $_id,
             $_id_author,
-            $_name,
+            $_username,
             $_id_post,
             $_content,
             $_creation_date;
@@ -36,9 +36,9 @@ class Comment
     {
         return $this->_id_author;
     }
-    public function name()
+    public function username()
     {
-        return $this->_name;
+        return $this->_username;
     }
     public function id_post()
     {
@@ -72,10 +72,10 @@ class Comment
             $this->_id_author = $id_author;
         }
     }
-    public function setName($name)
+    public function setUsername($username)
     {
-        if (is_string($name)){
-            $this->_name = $name;
+        if (is_string($username)){
+            $this->_username = $username;
         }
     }
     public function setId_post($id_post)
