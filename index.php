@@ -1,5 +1,5 @@
 <?php 
-
+session_start();
 function autoload($class_name){
     require 'controller/' . $class_name . '.php';
 }
@@ -17,14 +17,20 @@ try {
                 break;
 
             case 'getOnePost':
-                if (isset($_GET['id']) && $_GET['id'] > 0){
-                    $commentController = new CommentController;
-                    $getComments = $commentController->getComments($_GET['id']);
-                    $postController = new PostController;
-                    $getOnePost = $postController->getOnePost($_GET['id'], $getComments);
+                if (isset($_SESSION['id']) AND isset($_SESSION['username'])) {
+                    if (isset($_GET['id']) && $_GET['id'] > 0){
+                        $commentController = new CommentController;
+                        $getComments = $commentController->getComments($_GET['id']);
+                        $postController = new PostController;
+                        $getOnePost = $postController->getOnePost($_GET['id'], $getComments);
+                    }else{
+                        throw new Exception('Aucun id de post envoyé');
+                    }
+                    
                 }else{
-                    throw new Exception('Aucun id de post envoyé');
+                    header('Location: index.php?action=showLogin');
                 }
+
                 break;
 
             case 'writePost':
@@ -64,6 +70,11 @@ try {
             case 'login':
                 $controller = new UserController;
                 $login = $controller->login();
+                break;
+            case 'logout':
+                $controller = new UserController;
+                $logout = $controller->logout();
+                break;
 
         }
     }

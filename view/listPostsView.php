@@ -19,6 +19,12 @@
 
 <?php $content = ob_get_clean(); ?>
 
-<?php require 'template.php'; ?>
+<?php
+    if (isset($_SESSION['id']) AND isset($_SESSION['username'])) {
+        require 'templateLogin.php';
+    }else{
+        require 'template.php'; 
+    }
+?>
 
 

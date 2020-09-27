@@ -13,6 +13,7 @@ class UserController
     {
         require 'view/loginView.php';
     }
+
     public function signup()
     {
         if (isset($_POST['username']) &&  isset($_POST['password1']) && isset($_POST['password2'])){
@@ -29,11 +30,12 @@ class UserController
                 }
             }
         }else{
-            throw new Exception('Incomplete form');
+            throw new Exception('Données manquantes');
 
         }
     }
-    public function login ()
+
+    public function login()
     {
         if(isset($_POST['username']) && isset($_POST['password'])){
             $userManager = new UserManager;
@@ -48,10 +50,13 @@ class UserController
             }else{
                 if ($isPasswordCorrect) {
                     session_start();
+
+                    // Création des variables de session
                     $_SESSION['id'] = $user->id();
                     $_SESSION['username'] = $user->username();
                     $_SESSION['admin'] = $user->admin();
-                    
+                    var_dump($_SESSION);
+
                     header('Location: index.php?action=getPosts');
                     
                 }else{
@@ -59,5 +64,15 @@ class UserController
                 }
             }        
         }
+    }
+
+    public function logout(){
+        session_start();
+
+        // Suppression des variables de session et de la session
+        $_SESSION = array();
+        session_destroy();
+
+        header('Location: index.php');
     }
 }

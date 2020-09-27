@@ -58,7 +58,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 mx-auto">
-                        <<img class="masthead-avatar img-fluid mb-5" src="public/img/profil.png" alt="Photo de profil de Rose Naudin" style="border-radius: 50%;" />
+                        <img class="masthead-avatar img-fluid mb-5" src="public/img/profil.png" alt="Photo de profil de Rose Naudin" style="border-radius: 50%;" />
 
                         <h2 class="text-white mb-4">About</h2>
                         <p class="text-white-50">
