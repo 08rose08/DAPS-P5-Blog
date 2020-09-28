@@ -16,57 +16,67 @@ try {
                 $getPost = $controller->getPosts();
                 break;
 
-            case 'getOnePost':
+            case 'getOnePost': //login
                 if (isset($_SESSION['id']) AND isset($_SESSION['username'])) {
-                    if (isset($_GET['id']) && $_GET['id'] > 0){
-                        $commentController = new CommentController;
-                        $getComments = $commentController->getComments();
                         $postController = new PostController;
-                        $getOnePost = $postController->getOnePost($getComments);
-                    }else{
-                        throw new Exception('Aucun id de post envoyé');
-                    }
-                    
+                        $getOnePost = $postController->getOnePost();                    
+                        break;
                 }else{
                     header('Location: index.php?action=showLogin');
                 }
 
-                break;
-
-            case 'writePost':
+            case 'writePost': //admin
                 $controller = new PostController;
                 $controller->writePost();
                 break;
 
-            case 'addPost':
-                    $controller = new PostController;
-                    $addPost = $controller->addPost();
+            case 'addPost': //admin
+                $controller = new PostController;
+                $addPost = $controller->addPost();
                 break;
-            case 'addComment':
+                
+            case 'addComment': //login
+                if (isset($_SESSION['id']) AND isset($_SESSION['username'])) {
                     $controller = new CommentController;
                     $addComment = $controller->addComment();
-                break;
-            case 'showSignup':
+                    break;
+                }else{
+                    header('Location: index.php?action=showLogin');
+                }
+
+            case 'showSignup': 
                 $controller = new UserController;
                 $showSignup = $controller->showFormSignup();
                 break;
+
             case 'signup':
                 $controller = new UserController;
                 $signup = $controller->signup();
                 break;
+
             case 'showLogin':
                 $controller = new UserController;
                 $showLogin = $controller->showFormLogin();
                 break;
+
             case 'login':
                 $controller = new UserController;
                 $login = $controller->login();
                 break;
-            case 'logout':
-                $controller = new UserController;
-                $logout = $controller->logout();
-                break;
 
+            case 'logout': //login
+                if (isset($_SESSION['id']) AND isset($_SESSION['username'])) {
+                    $controller = new UserController;
+                    $logout = $controller->logout();
+                    break;
+                }else{
+                    header('Location: index.php?action=showLogin');
+                }
+
+
+            case 'admin':
+                //if pas admin -> modal?? 'espace reserve à l'admin"
+                //else if admin 
         }
     }
 }

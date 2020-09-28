@@ -1,9 +1,7 @@
-
-
-<?php $title = 'Mon Blog : la liste'; ?>
-<?php $page = 'Le blog-recettes'; ?>
-
-<?php ob_start(); ?>
+<?php 
+    $this->title = 'Mon Blog : la liste';
+    $this->page = 'Le blog-recettes';
+?>
 
 <main class="bg-black p-3">
     <?php
@@ -16,15 +14,3 @@
         </div>
     <?php } ?>
 </main>
-
-<?php $content = ob_get_clean(); ?>
-
-<?php
-    if (isset($_SESSION['id']) AND isset($_SESSION['username'])) {
-        require 'templateLogin.php';
-    }else{
-        require 'template.php'; 
-    }
-?>
-
-

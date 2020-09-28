@@ -13,10 +13,6 @@
       <div class="modal-body">
         <form method="post" action="index.php?action=addComment&amp;id=<?= $_GET['id'] ?>">
             <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" class="form-control" id="name" required data-validation-required-message="Veuillez écrire votre nom svp.">
-            </div>
-            <div class="form-group">
                 <label for="content">Commentaire</label>
                 <textarea class="form-control" name="content" id="content" rows="3" required data-validation-required-message="Veuillez écrire votre commentaire svp."></textarea>
             </div>

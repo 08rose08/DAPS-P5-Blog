@@ -11,7 +11,7 @@ class PostManager extends Manager
         $posts = [];
         $db = $this->dbConnect();
         $req = $db->query('SELECT post.id, post.id_author, post.title, post.content, post.chapo, DATE_FORMAT(post.last_update_date, \'%d/%m/%Y à %Hh%imin%ss\') AS last_update_date, user.username FROM post JOIN user ON post.id_author = user.id ORDER BY last_update_date DESC');
-        
+        //var_dump($req);
         while ($data = $req->fetch(PDO::FETCH_ASSOC))
         {
             $posts[] = new Post($data);
@@ -35,16 +35,9 @@ class PostManager extends Manager
         return $post;
     }
 
-    public function addPost()
+    public function addPost($post)
     {
-        $data = array(
-            'id_author' => $_SESSION['id'],
-            'title' => $_POST['title'],
-            'content'=> $_POST['content'],
-            'chapo' => $_POST['chapo']
-        );
 
-        $post = new Post($data);
 
         $db = $this->dbConnect();
         $addPost = $db->prepare('INSERT INTO post VALUES (NULL, :id_author, :title, :content, NOW(), :chapo)');

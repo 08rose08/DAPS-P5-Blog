@@ -1,7 +1,7 @@
-<?php $title = 'The Blog : log in'; ?>
-<?php $page = 'Log in'; ?>
-
-<?php ob_start(); ?>
+<?php 
+    $this->title = 'Blog : log in';
+    $this->page = 'Log in';
+?>
 
 <main class="bg-black text-white-50 py-5">
     
@@ -20,7 +20,3 @@
     </form>
 
 </main>
-
-<?php $content = ob_get_clean(); ?>
-
-<?php require 'template.php'; ?>

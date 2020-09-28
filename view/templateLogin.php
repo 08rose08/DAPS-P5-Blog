@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -32,7 +30,14 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php?action=getPosts">Blog</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php?action=logout">Logout</a></li>
+
+                        <?php if($_SESSION){
+                            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php?action=logout">Logout</a></li>
+                        }else{
+                            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php?action=showSignup">Signup</a></li>
+                            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php?action=showLogin">Login</a></li>
+                        } ?>
+
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="public/CV_NaudinR-en.pdf" target="_blank">CV</a></li>
                     </ul>
                 </div>
@@ -47,7 +52,11 @@
                 </div>
             </div>
         </header>
-        <?= 'Bonjour ' . $_SESSION['username'] ?>
+        <?php
+        if ($_SESSION){
+            'Bonjour ' . $_SESSION['username'] 
+        }?>
+
         <?= $content ?>
 
         <section class="contact-section bg-black">
@@ -63,6 +72,7 @@
 
         <!-- Footer-->
         <footer class="footer bg-black small text-center text-white-50">
+            <div class=""><a href="index.php?action=admin">Admin</a></div>
             <div class="container">Copyright © ThePinkMuffin 2020</div>
         </footer>
 

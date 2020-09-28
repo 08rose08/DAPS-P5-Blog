@@ -2,16 +2,22 @@
 
 require_once 'model/UserManager.php';
 require_once 'model/User.php';
+require_once 'view/View.php';
 
 class UserController
 {
     public function showFormSignup()
     {
-        require 'view/signupView.php';
+        $view = new View('signup');
+        $view->render();
+        //require 'view/signupView.php';
     }
     public function showFormLogin()
     {
-        require 'view/loginView.php';
+        $view = new View('login');
+        $view->render();
+
+        //require 'view/loginView.php';
     }
 
     public function signup()

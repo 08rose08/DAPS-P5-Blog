@@ -18,16 +18,8 @@ class CommentManager extends Manager
         }
         return $comments; 
     }
-    public function addComment()
+    public function addComment($comment)
     {
-        $data = array(
-            'id_author' => $_SESSION['id'],
-            'content'=> $_POST['content'],
-            'id_post' => $_GET['id']
-        );
-
-        $comment = new Comment($data);
-
         $db = $this->dbConnect();
         $addComment = $db->prepare('INSERT INTO comment VALUES (NULL,:id_post, :id_author, :content, NOW())');
         $addComment->bindValue(':id_post', $comment->id_post());

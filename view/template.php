@@ -30,8 +30,14 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php?action=getPosts">Blog</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php?action=showSignup">Signup</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php?action=showLogin">Login</a></li>
+                       
+                        <?php if($_SESSION){
+                            echo '<li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php?action=logout">Logout</a></li>';
+                        }else{
+                            echo '<li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php?action=showSignup">Signup</a></li>
+                            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php?action=showLogin">Login</a></li>';
+                        } ?>                      
+                        
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="public/CV_NaudinR-en.pdf" target="_blank">CV</a></li>
                     </ul>
                 </div>
@@ -46,6 +52,11 @@
                 </div>
             </div>
         </header>
+
+        <?php
+        if ($_SESSION){
+            echo 'Bonjour ' . $_SESSION['username'];
+        }?>
 
         <?= $content ?>
 

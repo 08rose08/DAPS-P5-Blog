@@ -1,7 +1,7 @@
-<?php $title = 'The Blog : sign up'; ?>
-<?php $page = 'Sign up'; ?>
-
-<?php ob_start(); ?>
+<?php 
+    $this->title = 'Blog : sign up';
+    $this->page = 'Sign up';
+?>
 
 <main class="bg-black text-white-50 py-5">
     
@@ -27,7 +27,3 @@
     </form>
 
 </main>
-
-<?php $content = ob_get_clean(); ?>
-
-<?php require 'template.php'; ?>
