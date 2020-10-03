@@ -1,6 +1,6 @@
 <?php
 
-require 'model/CommentManager.php';
+//require 'model/CommentManager.php';
 
 class CommentController
 {

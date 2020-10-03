@@ -55,7 +55,7 @@
 
         <?php
         if ($_SESSION){
-            echo 'Bonjour ' . $_SESSION['username'];
+            echo '<div class="bg-black text-white-50 text-center">Bonjour ' . $_SESSION['username'] . '</div>';
         }?>
 
         <?= $content ?>
@@ -73,6 +73,11 @@
 
         <!-- Footer-->
         <footer class="footer bg-black small text-center text-white-50">
+            <?php
+                if ($_SESSION['admin'] == 1){
+                    echo '<div class=""><a href="index.php?action=admin">Admin</a></div>';
+                }
+            ?>
             <div class="container">Copyright © ThePinkMuffin 2020</div>
         </footer>
 

@@ -1,7 +1,7 @@
 <?php
 
-require_once 'Manager.php';
-require 'Comment.php';
+//require_once 'Manager.php';
+//require 'Comment.php';
 
 class CommentManager extends Manager
 {

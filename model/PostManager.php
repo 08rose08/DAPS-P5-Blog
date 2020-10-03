@@ -1,7 +1,7 @@
 <?php
 
-require_once 'Manager.php';
-require 'Post.php';
+//require_once 'Manager.php';
+//require 'Post.php';
 
 class PostManager extends Manager
 {

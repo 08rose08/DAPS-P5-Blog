@@ -1,10 +1,7 @@
 <?php 
 session_start();
-function autoload($class_name){
-    require 'controller/' . $class_name . '.php';
-}
 
-spl_autoload_register('autoload');
+include_once 'config.php';
 
 try {
     if (empty($_GET)){
