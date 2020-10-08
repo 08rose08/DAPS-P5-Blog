@@ -2,8 +2,6 @@
 
 global $hostC, $dbnameC, $usernameC, $passwordC;
 
-
-
 abstract class Manager
 {
     protected function dbConnect()

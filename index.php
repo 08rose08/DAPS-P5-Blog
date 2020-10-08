@@ -6,6 +6,7 @@ include_once 'config.php';
 try {
     if (empty($_GET)){
         $controller = new IndexController;
+        $controller->showIndex();
     }else{
         switch ($_GET['action']){
             case 'getPosts':
@@ -23,9 +24,13 @@ try {
                 }
 
             case 'writePost': //admin
-                $controller = new PostController;
-                $controller->writePost();
-                break;
+                if ($_SESSION['admin'] != 1){
+                    
+                }else{
+                    $controller = new PostController;
+                    $controller->writePost();
+                    break;
+                }
 
             case 'addPost': //admin
                 $controller = new PostController;
@@ -71,9 +76,23 @@ try {
                 }
 
 
-            case 'admin':
+            case 'showAdmin':
                 //if pas admin -> modal?? 'espace reserve à l'admin"
                 //else if admin 
+                if ($_SESSION['admin'] != 1){
+
+                }else{
+                    $controller = new IndexController;
+                    $controller->showAdmin();
+                    break;
+                }
+
+            case 'getInvalidComments':
+                if ($_SESSION['admin'] != 1){
+                }else{
+                    $controller = new CommentController;
+                    $controller->getInvalidComments();
+                }
         }
     }
 }

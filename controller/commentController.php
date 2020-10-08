@@ -24,6 +24,15 @@ class CommentController
         }else{
             throw new Exception('Pas de commentaire envoyé');
         }
+    }
+
+    public function getInvalidComments()
+    {
+        $commentManager = new CommentManager;
+        $comments = $commentManager->getInvalidComments();
+
+        $view = new View('invalidComments');
+        $view->render(array('comments' => $comments));
 
     }
 }

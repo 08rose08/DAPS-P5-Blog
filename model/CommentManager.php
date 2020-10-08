@@ -9,7 +9,7 @@ class CommentManager extends Manager
     {
         $comments = [];
         $db = $this->dbConnect();
-        $req = $db->prepare('SELECT comment.id, comment.id_post, comment.id_author, comment.content, DATE_FORMAT(comment.creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date, user.username FROM comment JOIN user ON comment.id_author = user.id WHERE comment.id_post = ? ORDER BY creation_date DESC');
+        $req = $db->prepare('SELECT comment.id, comment.id_post, comment.id_author, comment.content, DATE_FORMAT(comment.creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date, user.username FROM comment JOIN user ON comment.id_author = user.id WHERE comment.id_post = ? AND comment.valid = 1 ORDER BY creation_date DESC');
         $req->execute(array($_GET['id']));
 
         while ($data = $req->fetch(PDO::FETCH_ASSOC))
@@ -29,5 +29,18 @@ class CommentManager extends Manager
         $affectedLines = $addComment->execute();
 
         return $affectedLines;
+    }
+
+    public function getInvalidComments()
+    {
+        $comments = [];
+        $db = $this->dbConnect();
+        $req = $db->query('SELECT comment.id, comment.id_post, comment.id_author, comment.content, DATE_FORMAT(comment.creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date, user.username FROM comment JOIN user ON comment.id_author = user.id WHERE comment.valid = 0 ORDER BY creation_date DESC');
+
+        while ($data = $req->fetch(PDO::FETCH_ASSOC))
+        {
+            $comments[] = new Comment($data);
+        }
+        return $comments; 
     }
 }

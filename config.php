@@ -1,9 +1,9 @@
 <?php 
 
-$hostC = 'host'; 
-$dbnameC = 'db'; 
-$usernameC = 'username'; 
-$passwordC = 'pass';
+$hostC = 'localhost'; 
+$dbnameC = 'blog'; 
+$usernameC = 'root'; 
+$passwordC = '';
 
 function autoload($class_name){
     $folders = array('controller/', 'model/', 'view/');
