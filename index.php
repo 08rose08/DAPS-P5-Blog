@@ -108,7 +108,21 @@ try {
                     $controller->updatePost();
                     break;
                 }
+            case 'deleteComment':
+                if ($_SESSION['admin'] != 1){
+                }else{
+                    $controller = new CommentController;
+                    $controller->deleteComment();
+                    break;
+                }
 
+            case 'validateComment':
+                if ($_SESSION['admin'] != 1){
+                }else{
+                    $controller = new CommentController;
+                    $controller->validateComment();
+                    break;
+                }
         }
     }
 }

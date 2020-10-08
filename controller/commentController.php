@@ -35,4 +35,35 @@ class CommentController
         $view->render(array('comments' => $comments));
 
     }
+
+    public function deleteComment()
+    {
+        if (isset($_SESSION) && $_SESSION['admin'] == 1){
+            $commentManager = new CommentManager;
+            $commentManager->deleteComment();
+            if ($affectedLines === false) {
+                throw new Exception('Impossible de supprimer le commentaire!');
+            }else{
+                header('Location: index.php?action=getInvalidComments');
+            }
+        }else{
+            throw new Exception('Il faut être admin');
+        }
+    }
+
+    public function validateComment()
+    {
+        if (isset($_SESSION) && $_SESSION['admin'] == 1){
+            $commentManager = new CommentManager;
+            $commentManager->validateComment();
+            if ($affectedLines === false) {
+                throw new Exception('Impossible de valider le commentaire!');
+            }else{
+                header('Location: index.php?action=getInvalidComments');
+            }
+        }else{
+            throw new Exception('Il faut être admin');
+        }
+
+    }
 }

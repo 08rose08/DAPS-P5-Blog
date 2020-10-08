@@ -43,4 +43,23 @@ class CommentManager extends Manager
         }
         return $comments; 
     }
+
+    public function deleteComment()
+    {
+        $db = $this->dbConnect();
+        $req = $db->prepare('DELETE FROM comment WHERE id = ?');
+        $affectedLines = $req->execute(array($_GET['id']));
+
+        return $affectedLines;
+    }
+
+    public function validateComment()
+    {
+        $db = $this->dbConnect();
+        $req = $db->prepare('UPDATE comment SET valid = 1 WHERE id = ?');
+        $affectedLines = $req->execute(array($_GET['id']));
+
+        return $affectedLines;
+
+    }
 }
