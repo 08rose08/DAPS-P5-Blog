@@ -45,7 +45,7 @@
         </nav>
 
         <header class="masthead-list">
-            <div class="container d-flex h-20 align-items-center">
+            <div class="container d-flex h-75 align-items-center">
         
                 <div class="mx-auto text-center">
                     <h1 class="mx-auto text-uppercase"><?= $page ?></h1>
@@ -74,9 +74,9 @@
         <!-- Footer-->
         <footer class="footer bg-black small text-center text-white-50">
             <?php
-                if ($_SESSION['admin'] == 1){
-                    echo '<div class=""><a href="index.php?action=admin">Admin</a></div>';
-                }
+                if ($_SESSION && $_SESSION['admin'] == 1){
+                    echo '<div class=""><a href="index.php?action=showAdmin">Admin</a></div>';
+                }else{}
             ?>
             <div class="container">Copyright © ThePinkMuffin 2020</div>
         </footer>
