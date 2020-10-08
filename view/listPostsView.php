@@ -11,12 +11,12 @@
             <div class="d-flex flex-column">
                 <h2><a href='index.php?action=getOnePost&amp;id=<?= $post->id() ?>'><?= $post->title() ?></a></h2>
                 <p><?= $post->chapo() ?></p>
-                <p>Par <?= $post->name() ?> le <?= $post->last_update_date() ?></p>
+                <p>Par <?= $post->username() ?> le <?= $post->last_update_date() ?></p>
             </div>
 
             <?php
                 if ($_SESSION && $_SESSION['admin'] == 1){
-                    include 'buttonsAdminView.php';
+                    include 'buttonsPostAdminView.php';
                     
                 }else{}
             ?> 

@@ -101,6 +101,13 @@ try {
                     $controller->deletePost();
                     break;
                 }
+            case 'updatePost':
+                if ($_SESSION['admin'] != 1){
+                }else{
+                    $controller = new PostController;
+                    $controller->updatePost();
+                    break;
+                }
 
         }
     }

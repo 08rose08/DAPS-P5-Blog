@@ -91,5 +91,35 @@ class PostController
             throw new Exception('Il faut être admin');
         }
     }
+    function updatePost()
+    {
+        if (isset($_SESSION) && $_SESSION['admin'] == 1){
+            if (isset($_SESSION['id']) && isset($_POST['title']) && isset($_POST['content']) && isset($_POST['chapo'])){
+        
+                $post = new Post($_POST);
+                $post->setId_author($_SESSION['id']);
+    
+                if(empty($post->title())){
+                    return $this->writePost($post, 'titre vide');
+                }elseif(empty($post->chapo())){
+                    return $this->writePost($post, 'chapô vide');
+                }elseif(empty($post->content())){
+                    return $this->writePost($post, 'contenu vide');
+                }
+    
+                $postManager = new PostManager;
+                $postManager->updatePost($post);
+                if ($affectedLines === false) {
+                    throw new Exception('Impossible de modifier le post!');
+                }else{
+                    header('Location: index.php?action=getPosts');
+                }
+            }else{
+                throw new Exception('Donnée.s manquante.s');
+            }
+        }else{
+            throw new Exception('Il faut être admin');
+        }
+    }
 
 }

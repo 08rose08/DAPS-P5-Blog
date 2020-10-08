@@ -59,4 +59,21 @@ class PostManager extends Manager
         $affectedLines = $req->execute(array($_GET['id']));
  
     }
+
+    public function updatePost($post)
+    {
+        $db = $this->dbConnect();
+        $addPost = $db->prepare('UPDATE post SET id_author = :id_author, title = :title, content = :content, last_update_date = NOW(), chapo = :chapo WHERE id = :id');
+        $addPost->bindValue(':id_author', $post->id_author());
+        $addPost->bindValue(':title', $post->title());
+        $addPost->bindValue(':content', $post->content());
+        $addPost->bindValue(':chapo', $post->chapo());
+        $addPost->bindValue(':id', $_GET['id']);
+
+
+        $affectedLines = $addPost->execute();
+
+        return $affectedLines;
+
+    }
 }

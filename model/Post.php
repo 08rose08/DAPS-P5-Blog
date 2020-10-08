@@ -4,7 +4,7 @@ class Post
 {
     private $_id,
             $_id_author,
-            $_name,
+            $_username,
             $_title,
             $_content,
             $_last_update_date,
@@ -37,9 +37,9 @@ class Post
     {
         return $this->_id_author;
     }
-    public function name()
+    public function username()
     {
-        return $this->_name;
+        return $this->_username;
     }
     public function title()
     {
@@ -76,10 +76,10 @@ class Post
             $this->_id_author = $id_author;
         }
     }
-    public function setName($name)
+    public function setUsername($username)
     {
-        if (is_string($name)){
-            $this->_name = $name;
+        if (is_string($username)){
+            $this->_username = $username;
         }
     }
     public function setTitle($title)

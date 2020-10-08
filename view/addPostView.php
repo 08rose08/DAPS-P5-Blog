@@ -12,15 +12,15 @@ if (!empty($message)){
     <form method="post" action="index.php?action=addPost" class="mx-lg-5">
         <div class="form-group">
             <label for="title">Titre</label>
-            <input value="<?php if(!empty($post)){echo $post->title();}; ?>" type="text" name="title" class="form-control" id ="title" placeholder="Titre" required></input>
+            <input value="<?php if(!empty($post)){echo $post->title();}; ?>" type="text" name="title" class="form-control" id ="title" placeholder="Titre" required />
         </div>
         <div class="form-group">
             <label for="chapo">Chapô</label>
-            <input value="<?php if(!empty($post)){echo $post->chapo();}; ?>" type="text" name="chapo" class="form-control" id ="chapo" placeholder="Chapô" required></input>
+            <input value="<?php if(!empty($post)){echo $post->chapo();}; ?>" type="text" name="chapo" class="form-control" id ="chapo" placeholder="Chapô" required />
         </div>
         <div class="form-group">
             <label for="content">Contenu</label>
-            <textarea value="<?php if(!empty($post)){echo $post->content();}; ?>" rows="5" name="content" class="form-control" id ="content" placeholder="Contenu" required></textarea>
+            <textarea rows="5" name="content" class="form-control" id ="content" placeholder="Contenu" required><?php if(!empty($post)){echo $post->content();}; ?></textarea>
         </div>
         <button type="submit" class="btn btn-primary">Mettre en ligne</button>
     </form>
