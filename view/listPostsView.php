@@ -7,10 +7,20 @@
     <?php
     foreach ($posts as $post){
     ?>
-        <div class="card bg-light m-3 p-3">
-            <h2><a href='index.php?action=getOnePost&amp;id=<?= $post->id() ?>'><?= $post->title() ?></a></h2>
-            <p><?= $post->chapo() ?></p>
-            <p>Par <?= $post->name() ?> le <?= $post->last_update_date() ?></p>
+        <div class="card bg-light m-3 p-3 d-flex flex-row justify-content-between">
+            <div class="d-flex flex-column">
+                <h2><a href='index.php?action=getOnePost&amp;id=<?= $post->id() ?>'><?= $post->title() ?></a></h2>
+                <p><?= $post->chapo() ?></p>
+                <p>Par <?= $post->name() ?> le <?= $post->last_update_date() ?></p>
+            </div>
+
+            <?php
+                if ($_SESSION && $_SESSION['admin'] == 1){
+                    include 'buttonsAdminView.php';
+                    
+                }else{}
+            ?> 
+            
         </div>
     <?php } ?>
 </main>

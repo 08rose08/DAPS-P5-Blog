@@ -92,7 +92,16 @@ try {
                 }else{
                     $controller = new CommentController;
                     $controller->getInvalidComments();
+                    break;
                 }
+            case 'deletePost':
+                if ($_SESSION['admin'] != 1){
+                }else{
+                    $controller = new PostController;
+                    $controller->deletePost();
+                    break;
+                }
+
         }
     }
 }

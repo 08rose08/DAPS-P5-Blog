@@ -77,4 +77,19 @@ class PostController
         }
 
     }
+    function deletePost()
+    {
+        if (isset($_SESSION) && $_SESSION['admin'] == 1){
+            $postManager = new PostManager;
+            $postManager->deletePost();
+            if ($affectedLines === false) {
+                throw new Exception('Impossible de supprimer le post!');
+            }else{
+                header('Location: index.php?action=getPosts');
+            }
+        }else{
+            throw new Exception('Il faut être admin');
+        }
+    }
+
 }
