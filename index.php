@@ -33,9 +33,13 @@ try {
                 }
 
             case 'addPost': //admin
-                $controller = new PostController;
-                $addPost = $controller->addPost();
-                break;
+                if ($_SESSION['admin'] != 1){
+                    
+                }else{
+                    $controller = new PostController;
+                    $addPost = $controller->addPost();
+                    break;
+                }
                 
             case 'addComment': //login
                 if (isset($_SESSION['id']) AND isset($_SESSION['username'])) {

@@ -41,22 +41,32 @@
 
       <div class="modal-body">
         <form method="post" action="index.php?action=updatePost&amp;id=<?= $post->id() ?>" class="mx-lg-5">
-        
-            <div class="form-group">
-                <label for="title">Titre</label>
-                <input value="<?= $post->title(); ?>" type="text" name="title" class="form-control" id ="title" placeholder="Titre" required />
-            </div>
-            <div class="form-group">
-                <label for="chapo">Chapô</label>
-                <input value="<?= $post->chapo(); ?>" type="text" name="chapo" class="form-control" id ="chapo" placeholder="Chapô" required />
-            </div>
-            <div class="form-group">
-                <label for="content">Contenu</label>
-                <textarea rows="5" name="content" class="form-control" id ="content" placeholder="Contenu" required><?= $post->content(); ?></textarea>
-            </div>
-        
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-            <button type="submit" class="btn btn-primary">Modifier</button>
+          <div class="form-group">
+              <label for="id_author">Auteur</label>
+              <select class="custom-select" id="id_author">
+                  <option selected>Choisir...</option>
+                  <?php foreach ($admins as $admin){ ?>
+                      <option value="<?= $admin->id() ?>">
+                          <?= $admin->username() ?>
+                      </option>
+                  <?php } ?>
+              </select>
+          </div>
+          <div class="form-group">
+              <label for="title">Titre</label>
+              <input value="<?= $post->title(); ?>" type="text" name="title" class="form-control" id ="title" placeholder="Titre" required />
+          </div>
+          <div class="form-group">
+              <label for="chapo">Chapô</label>
+              <input value="<?= $post->chapo(); ?>" type="text" name="chapo" class="form-control" id ="chapo" placeholder="Chapô" required />
+          </div>
+          <div class="form-group">
+              <label for="content">Contenu</label>
+              <textarea rows="5" name="content" class="form-control" id ="content" placeholder="Contenu" required><?= $post->content(); ?></textarea>
+          </div>
+      
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+          <button type="submit" class="btn btn-primary">Modifier</button>
         </form>
       </div>
     </div>

@@ -5,7 +5,6 @@
 
 <main class="bg-black p-3">
     <div class="card card-body bg-light m-3 p-3">
-    <div class="card bg-light m-3 p-3">
         <div class="d-flex flex-row justify-content-between">
             <div class="d-flex flex-column">
 

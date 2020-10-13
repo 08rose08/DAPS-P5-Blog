@@ -11,8 +11,11 @@ class PostController
         $postManager = new PostManager;
         $posts = $postManager->getPosts();
         //print_r($posts);
+        $userManager = new UserManager;
+        $admins = $userManager->getAdmins();
+
         $view = new View('listPosts');
-        $view->render(array('posts' => $posts));
+        $view->render(array('posts' => $posts, 'admins' => $admins));
 
         //require 'view/listPostsView.php';
     }
@@ -26,8 +29,11 @@ class PostController
             $postManager = new PostManager;
             $post = $postManager->getOnePost($_GET['id']);
             
+            $userManager = new UserManager;
+            $admins = $userManager->getAdmins();    
+
             $view = new View('post');
-            $view->render(array('post' => $post, 'comments' => $comments));
+            $view->render(array('post' => $post, 'comments' => $comments, 'admins' => $admins));
             //require 'view/postView.php';
         }else{
             throw new Exception('Aucun id de post envoyé');
@@ -39,14 +45,16 @@ class PostController
         /*if (!$post){
             $post = new Post;
         }*/
+        $userManager = new UserManager;
+        $admins = $userManager->getAdmins();
         $view = new View('addPost');
-        $view->render();
+        $view->render(array('admins' => $admins));
         //require 'view/addPostView.php';
     }
 
     function addPost()
     {
-        if (isset($_SESSION['id']) && isset($_POST['title']) && isset($_POST['content']) && isset($_POST['chapo'])){
+        if (isset($_POST['id_author']) && isset($_POST['title']) && isset($_POST['content']) && isset($_POST['chapo'])){
             /*$data = array(
                 'id_author' => $_SESSION['id'],
                 'title' => $_POST['title'],
@@ -55,7 +63,7 @@ class PostController
             );*/
     
             $post = new Post($_POST);
-            $post->setId_author($_SESSION['id']);
+            //$post->setId_author($_SESSION['id']);
 
             if(empty($post->title())){
                 return $this->writePost($post, 'titre vide');
@@ -63,6 +71,8 @@ class PostController
                 return $this->writePost($post, 'chapô vide');
             }elseif(empty($post->content())){
                 return $this->writePost($post, 'contenu vide');
+            }elseif(empty($post->id_author())){
+                return $this->writePost($post, 'auteur.e non sélectionné.e');
             }
 
             $postManager = new PostManager;
@@ -94,10 +104,10 @@ class PostController
     function updatePost()
     {
         if (isset($_SESSION) && $_SESSION['admin'] == 1){
-            if (isset($_SESSION['id']) && isset($_POST['title']) && isset($_POST['content']) && isset($_POST['chapo'])){
+            if (isset($_POST['id_author']) && isset($_POST['title']) && isset($_POST['content']) && isset($_POST['chapo'])){
         
                 $post = new Post($_POST);
-                $post->setId_author($_SESSION['id']);
+                //$post->setId_author($_SESSION['id']);
     
                 if(empty($post->title())){
                     return $this->writePost($post, 'titre vide');
@@ -105,6 +115,8 @@ class PostController
                     return $this->writePost($post, 'chapô vide');
                 }elseif(empty($post->content())){
                     return $this->writePost($post, 'contenu vide');
+                }elseif (empty($post->id_author())) {
+                    return $this->writePost($post, 'auteur.e non sélectionné.e');
                 }
     
                 $postManager = new PostManager;

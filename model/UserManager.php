@@ -50,11 +50,24 @@ class UserManager extends Manager
         $req = $db->prepare('SELECT * FROM user WHERE username = ?');
         $req->execute(array($_POST['username']));
         $data = $req->fetch();
-        
+        //if $data est ok tableau
         $user = new User($data);
 
         return $user;
 
         
+    }
+
+    public function getAdmins()
+    {   
+        $admins = [];
+        $db = $this->dbConnect();
+        $req = $db->query('SELECT id, username FROM user WHERE user.admin = 1');
+        while ($data = $req->fetch(PDO::FETCH_ASSOC))
+        {
+            $admins[] = new User($data);
+        }
+
+        return $admins;
     }
 }

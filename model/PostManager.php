@@ -10,7 +10,7 @@ class PostManager extends Manager
     {
         $posts = [];
         $db = $this->dbConnect();
-        $req = $db->query('SELECT post.id, post.id_author, post.title, post.content, post.chapo, DATE_FORMAT(post.last_update_date, \'%d/%m/%Y à %Hh%imin%ss\') AS last_update_date, user.username FROM post JOIN user ON post.id_author = user.id ORDER BY last_update_date DESC');
+        $req = $db->query('SELECT post.id, post.id_author, post.title, post.content, post.chapo, DATE_FORMAT(post.last_update_date, \'%d/%m/%Y à %Hh%imin%ss\') AS last_update_date, user.username FROM post JOIN user ON post.id_author = user.id ORDER BY post.last_update_date DESC');
         //var_dump($req);
         while ($data = $req->fetch(PDO::FETCH_ASSOC))
         {
