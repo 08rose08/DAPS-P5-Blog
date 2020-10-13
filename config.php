@@ -1,9 +1,9 @@
 <?php 
 
-$hostC = '/'; 
-$dbnameC = '/'; 
-$usernameC = '/'; 
-$passwordC = '/';
+define('HOSTC', '/'); 
+define('DBNAMEC', '/'); 
+define('USERNAMEC', '/'); 
+define('PASSWORDC', '/');
 
 function autoload($class_name){
     $folders = array('controller/', 'model/', 'view/');
