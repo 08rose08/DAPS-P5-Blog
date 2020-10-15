@@ -15,7 +15,7 @@ try {
                 break;
 
             case 'getOnePost': //login
-                if (isset($_SESSION['id']) AND isset($_SESSION['username'])) {
+                if (isset($_SESSION['id']) AND isset($_SESSION['username'])){
                         $postController = new PostController;
                         $getOnePost = $postController->getOnePost();                    
                         break;
@@ -42,7 +42,7 @@ try {
                 }
                 
             case 'addComment': //login
-                if (isset($_SESSION['id']) AND isset($_SESSION['username'])) {
+                if (isset($_SESSION['id']) AND isset($_SESSION['username'])){
                     $controller = new CommentController;
                     $addComment = $controller->addComment();
                     break;
@@ -71,7 +71,7 @@ try {
                 break;
 
             case 'logout': //login
-                if (isset($_SESSION['id']) AND isset($_SESSION['username'])) {
+                if (isset($_SESSION['id']) AND isset($_SESSION['username'])){
                     $controller = new UserController;
                     $logout = $controller->logout();
                     break;

@@ -5,23 +5,23 @@
 
 class UserManager extends Manager
 {
-    public function signup()
+    public function signup($username, $password)
     {
-        if ($this->alreadyExist()){
+        if ($this->alreadyExist($username)){
             throw new Exception('Username already exists');
 
         }else{
-            $passHash = password_hash($_POST['password1'], PASSWORD_DEFAULT);
+            $passHash = password_hash($password, PASSWORD_DEFAULT);
             $data = array(
-                'username' => $_POST['username'],
-                'password'=> $passHash,
+                'username' => $username,
+                'pass'=> $passHash,
             );
             $user = new User($data);
 
             $db = $this->dbConnect();
             $addUser = $db->prepare('INSERT INTO user VALUES (NULL, :username, :pass, 0)');
             $addUser->bindValue(':username', $user->username());
-            $addUser->bindValue(':pass', $user->password());
+            $addUser->bindValue(':pass', $user->pass());
 
             $affectedLines = $addUser->execute();
 
@@ -30,11 +30,11 @@ class UserManager extends Manager
         }
     }
 
-    public function alreadyExist()
+    public function alreadyExist($username)
     {
         $db = $this->dbConnect();
         $req = $db->prepare('SELECT username FROM user WHERE username = ?');
-        $req->execute(array($_POST['username']));
+        $req->execute(array($username));
         
         if($req->rowCount() > 0) {
             return true;
@@ -44,11 +44,11 @@ class UserManager extends Manager
         }
 
     }
-    public function login()
+    public function login($username)
     {
         $db = $this->dbConnect();
         $req = $db->prepare('SELECT * FROM user WHERE username = ?');
-        $req->execute(array($_POST['username']));
+        $req->execute(array($username));
         $data = $req->fetch();
         //if $data est ok tableau
         $user = new User($data);

@@ -4,7 +4,7 @@
 //require_once 'model/User.php';
 //require_once 'view/View.php';
 
-class UserController
+class UserController extends Controller
 {
     public function showFormSignup()
     {
@@ -26,8 +26,12 @@ class UserController
             if ($_POST['password1'] != $_POST['password2']){
                 throw new Exception('Not the same password');
             }else{
+                //ici vérifier avec les regex
+                $username = $this->checkLine($_POST['username']);
+                $password = $this->checkLine($_POST['password1']);
+
                 $userManager = new UserManager;
-                $affectedLines = $userManager->signup();
+                $affectedLines = $userManager->signup($username, $password);
 
                 if ($affectedLines === false) {
                     throw new Exception('Impossible d\'ajouter l\'utilisateur');
@@ -44,11 +48,13 @@ class UserController
     public function login()
     {
         if(isset($_POST['username']) && isset($_POST['password'])){
-            $userManager = new UserManager;
-            $user = $userManager->login();
-            
+            $username = $this->checkLine($_POST['username']);
+            $password = $this->checkLine($_POST['password']);
 
-            $isPasswordCorrect = password_verify($_POST['password'], $user->pass());
+            $userManager = new UserManager;
+            $user = $userManager->login($username);
+            
+            $isPasswordCorrect = password_verify($password, $user->pass());
 
             if (!$user) {
                 throw new Exception('Mauvais identifiant ou mot de passe !');

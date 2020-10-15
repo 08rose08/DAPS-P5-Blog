@@ -7,16 +7,16 @@
     
     <form method="post" action="index.php?action=signup" class="d-flex flex-column align-items-center">
         <div class="form-group">
-            <label for="username">Name</label>
-            <input type="text" name="username" class="form-control" id ="username" placeholder="Name" required></input>
+            <label for="username">Username</label>
+            <input type="text" name="username" class="form-control" id ="username" placeholder="Name" pattern="^[A-Za-z0-9 '-]+$" maxlength="20" required></input>
         </div>
         <div class="form-group">
             <label for="password1">Password</label>
-            <input type="password" name="password1" class="form-control" id ="password1" placeholder="password" required></input>
+            <input type="password" name="password1" class="form-control" id ="password1" placeholder="password" pattern="^[A-Za-z0-9]+$" maxlength="20" required></input>
         </div>
         <div class="form-group">
             <label for="password2">Repeat Password</label>
-            <input type="password" name="password2" class="form-control" id ="password2" placeholder="password" required></input>
+            <input type="password" name="password2" class="form-control" id ="password2" placeholder="password" pattern="^[A-Za-z0-9]+$" maxlength="20" required></input>
         </div>
         <div class="form-check">
             <input type="checkbox" class="form-check-input" id="confidentialite" required>

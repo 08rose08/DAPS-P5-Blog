@@ -72,7 +72,6 @@ class PostManager extends Manager
         $addPost->bindValue(':chapo', $post->chapo());
         $addPost->bindValue(':id', $_GET['id']);
 
-
         $affectedLines = $addPost->execute();
 
         return $affectedLines;

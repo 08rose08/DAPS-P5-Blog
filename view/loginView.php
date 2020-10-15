@@ -8,11 +8,11 @@
     <form method="post" action="index.php?action=login" class="d-flex flex-column align-items-center">
         <div class="form-group">
             <label for="username">Name</label>
-            <input type="text" name="username" class="form-control" id ="username" placeholder="Name" required></input>
+            <input type="text" name="username" class="form-control" id ="username" placeholder="Name" pattern="^[A-Za-z0-9 '-]+$" maxlength="20" required></input>
         </div>
         <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" name="password" class="form-control" id ="password" placeholder="password" required></input>
+            <input type="password" name="password" class="form-control" id ="password" placeholder="password" pattern="^[A-Za-z0-9]+$" maxlength="20" required></input>
         </div>
         
         

@@ -4,7 +4,7 @@
 //require_once 'model/CommentManager.php';
 //require_once 'view/View.php';
 
-class PostController
+class PostController extends Controller
 {
     function getPosts()
     {
@@ -55,14 +55,18 @@ class PostController
     function addPost()
     {
         if (isset($_POST['id_author']) && isset($_POST['title']) && isset($_POST['content']) && isset($_POST['chapo'])){
-            /*$data = array(
-                'id_author' => $_SESSION['id'],
-                'title' => $_POST['title'],
-                'content'=> $_POST['content'],
-                'chapo' => $_POST['chapo']
-            );*/
+            /*$title = $this->checkLine($_POST['title']);
+            $content = $this->checkText($_POST['content']);
+            $chapo = $this->checkText($_POST['chapo']);*/
+            
+            $data = array(
+                'id_author' => $_POST['id_author'],
+                'title' => $this->checkLine($_POST['title']),
+                'content'=> $this->checkText($_POST['content']),
+                'chapo' => $this->checkText($_POST['chapo'])
+            );
     
-            $post = new Post($_POST);
+            $post = new Post($data);
             //$post->setId_author($_SESSION['id']);
 
             if(empty($post->title())){
@@ -83,7 +87,8 @@ class PostController
                 header('Location: index.php?action=getPosts');
             }
         }else{
-            throw new Exception('Donnée.s manquante.s');
+            //throw new Exception('Donnée.s manquante.s');
+            var_dump($_POST);
         }
 
     }
@@ -104,9 +109,16 @@ class PostController
     function updatePost()
     {
         if (isset($_SESSION) && $_SESSION['admin'] == 1){
+            
             if (isset($_POST['id_author']) && isset($_POST['title']) && isset($_POST['content']) && isset($_POST['chapo'])){
-        
-                $post = new Post($_POST);
+                $data = array(
+                    'id_author' => $_SESSION['id'],
+                    'title' => $this->checkLine($_POST['title']),
+                    'content'=> $this->checkText($_POST['content']),
+                    'chapo' => $this->checkText($_POST['chapo'])
+                );
+                
+                $post = new Post($data);
                 //$post->setId_author($_SESSION['id']);
     
                 if(empty($post->title())){
@@ -128,6 +140,7 @@ class PostController
                 }
             }else{
                 throw new Exception('Donnée.s manquante.s');
+                
             }
         }else{
             throw new Exception('Il faut être admin');

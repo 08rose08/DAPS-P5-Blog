@@ -12,7 +12,7 @@ if (!empty($message)){
     <form method="post" action="index.php?action=addPost" class="mx-lg-5">
         <div class="form-group">
             <label for="id_author">Auteur</label>
-            <select class="custom-select" id="id_author">
+            <select class="custom-select" id="id_author" name="id_author">
                 <option selected>Choisir...</option>
                 <?php foreach ($admins as $admin){ ?>
                     <option value="<?= $admin->id() ?>">

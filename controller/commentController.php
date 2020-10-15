@@ -2,14 +2,15 @@
 
 //require 'model/CommentManager.php';
 
-class CommentController
+class CommentController extends Controller
 {
 
     function addComment()
     {
         if (isset($_SESSION['id']) && isset($_GET['id']) && isset($_POST['content'])){
-            
-            $comment = new Comment($_POST);
+            $content = $this->checkText($_POST['content']);
+
+            $comment = new Comment($content);
             $comment->setId_post($_GET['id']);
             $comment->setId_author($_SESSION['id']);
 
