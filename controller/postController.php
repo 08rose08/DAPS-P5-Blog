@@ -22,12 +22,14 @@ class PostController extends Controller
     
     function getOnePost()
     {
-        if (isset($_GET['id']) && $_GET['id'] > 0){
+        if (isset($_GET['id']) && (int)$_GET['id'] > 0){
+            $getId = (int)$_GET['id'];
+
             $commentManager = new CommentManager;
             $comments = $commentManager->getComments();
             
             $postManager = new PostManager;
-            $post = $postManager->getOnePost($_GET['id']);
+            $post = $postManager->getOnePost($getId);
             
             $userManager = new UserManager;
             $admins = $userManager->getAdmins();    
@@ -60,7 +62,7 @@ class PostController extends Controller
             $chapo = $this->checkText($_POST['chapo']);*/
             
             $data = array(
-                'id_author' => $_POST['id_author'],
+                'id_author' => (int)$_POST['id_author'],
                 'title' => $this->checkLine($_POST['title']),
                 'content'=> $this->checkText($_POST['content']),
                 'chapo' => $this->checkText($_POST['chapo'])
@@ -87,16 +89,15 @@ class PostController extends Controller
                 header('Location: index.php?action=getPosts');
             }
         }else{
-            //throw new Exception('Donnée.s manquante.s');
-            var_dump($_POST);
+            throw new Exception('Donnée.s manquante.s');
         }
 
     }
     function deletePost()
     {
-        if (isset($_SESSION) && $_SESSION['admin'] == 1){
+        if (isset($_SESSION) && (int)$_SESSION['admin'] == 1){
             $postManager = new PostManager;
-            $postManager->deletePost();
+            $affectedLines = $postManager->deletePost();
             if ($affectedLines === false) {
                 throw new Exception('Impossible de supprimer le post!');
             }else{
@@ -108,11 +109,11 @@ class PostController extends Controller
     }
     function updatePost()
     {
-        if (isset($_SESSION) && $_SESSION['admin'] == 1){
+        if (isset($_SESSION) && (int)$_SESSION['admin'] == 1){
             
             if (isset($_POST['id_author']) && isset($_POST['title']) && isset($_POST['content']) && isset($_POST['chapo'])){
                 $data = array(
-                    'id_author' => $_SESSION['id'],
+                    'id_author' => (int)$_SESSION['id'],
                     'title' => $this->checkLine($_POST['title']),
                     'content'=> $this->checkText($_POST['content']),
                     'chapo' => $this->checkText($_POST['chapo'])

@@ -8,8 +8,8 @@ class CommentManager extends Manager
     public function getComments()
     {
         $comments = [];
-        $db = $this->dbConnect();
-        $req = $db->prepare('SELECT comment.id, comment.id_post, comment.id_author, comment.content, DATE_FORMAT(comment.creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date, user.username FROM comment JOIN user ON comment.id_author = user.id WHERE comment.id_post = ? AND comment.valid = 1 ORDER BY creation_date DESC');
+        $getdb = $this->dbConnect();
+        $req = $getdb->prepare('SELECT comment.id, comment.id_post, comment.id_author, comment.content, DATE_FORMAT(comment.creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date, user.username FROM comment JOIN user ON comment.id_author = user.id WHERE comment.id_post = ? AND comment.valid = 1 ORDER BY creation_date DESC');
         $req->execute(array($_GET['id']));
 
         while ($data = $req->fetch(PDO::FETCH_ASSOC))
@@ -20,8 +20,8 @@ class CommentManager extends Manager
     }
     public function addComment($comment)
     {
-        $db = $this->dbConnect();
-        $addComment = $db->prepare('INSERT INTO comment VALUES (NULL,:id_post, :id_author, :content, NOW())');
+        $getdb = $this->dbConnect();
+        $addComment = $getdb->prepare('INSERT INTO comment VALUES (NULL,:id_post, :id_author, :content, NOW())');
         $addComment->bindValue(':id_post', $comment->id_post());
         $addComment->bindValue(':id_author', $comment->id_author());
         $addComment->bindValue(':content', $comment->content());
@@ -34,8 +34,8 @@ class CommentManager extends Manager
     public function getInvalidComments()
     {
         $comments = [];
-        $db = $this->dbConnect();
-        $req = $db->query('SELECT comment.id, comment.id_post, comment.id_author, comment.content, DATE_FORMAT(comment.creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date, user.username FROM comment JOIN user ON comment.id_author = user.id WHERE comment.valid = 0 ORDER BY creation_date DESC');
+        $getdb = $this->dbConnect();
+        $req = $getdb->query('SELECT comment.id, comment.id_post, comment.id_author, comment.content, DATE_FORMAT(comment.creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date, user.username FROM comment JOIN user ON comment.id_author = user.id WHERE comment.valid = 0 ORDER BY creation_date DESC');
 
         while ($data = $req->fetch(PDO::FETCH_ASSOC))
         {
@@ -46,8 +46,8 @@ class CommentManager extends Manager
 
     public function deleteComment()
     {
-        $db = $this->dbConnect();
-        $req = $db->prepare('DELETE FROM comment WHERE id = ?');
+        $getdb = $this->dbConnect();
+        $req = $getdb->prepare('DELETE FROM comment WHERE id = ?');
         $affectedLines = $req->execute(array($_GET['id']));
 
         return $affectedLines;
@@ -55,8 +55,8 @@ class CommentManager extends Manager
 
     public function validateComment()
     {
-        $db = $this->dbConnect();
-        $req = $db->prepare('UPDATE comment SET valid = 1 WHERE id = ?');
+        $getdb = $this->dbConnect();
+        $req = $getdb->prepare('UPDATE comment SET valid = 1 WHERE id = ?');
         $affectedLines = $req->execute(array($_GET['id']));
 
         return $affectedLines;

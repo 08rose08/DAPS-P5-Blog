@@ -18,8 +18,8 @@ class UserManager extends Manager
             );
             $user = new User($data);
 
-            $db = $this->dbConnect();
-            $addUser = $db->prepare('INSERT INTO user VALUES (NULL, :username, :pass, 0)');
+            $getdb = $this->dbConnect();
+            $addUser = $getdb->prepare('INSERT INTO user VALUES (NULL, :username, :pass, 0)');
             $addUser->bindValue(':username', $user->username());
             $addUser->bindValue(':pass', $user->pass());
 
@@ -32,8 +32,8 @@ class UserManager extends Manager
 
     public function alreadyExist($username)
     {
-        $db = $this->dbConnect();
-        $req = $db->prepare('SELECT username FROM user WHERE username = ?');
+        $getdb = $this->dbConnect();
+        $req = $getdb->prepare('SELECT username FROM user WHERE username = ?');
         $req->execute(array($username));
         
         if($req->rowCount() > 0) {
@@ -46,8 +46,8 @@ class UserManager extends Manager
     }
     public function login($username)
     {
-        $db = $this->dbConnect();
-        $req = $db->prepare('SELECT * FROM user WHERE username = ?');
+        $getdb = $this->dbConnect();
+        $req = $getdb->prepare('SELECT * FROM user WHERE username = ?');
         $req->execute(array($username));
         $data = $req->fetch();
         //if $data est ok tableau

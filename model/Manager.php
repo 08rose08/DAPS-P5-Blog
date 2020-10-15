@@ -5,8 +5,8 @@ abstract class Manager
     protected function dbConnect()
     {
         try {
-            $db = new PDO('mysql:host=' . HOSTC . ';dbname=' . DBNAMEC . ';charset=utf8', USERNAMEC, PASSWORDC);
-            return $db;
+            $getdb = new PDO('mysql:host=' . HOSTC . ';dbname=' . DBNAMEC . ';charset=utf8', USERNAMEC, PASSWORDC);
+            return $getdb;
         } 
         catch (Exception $e)
         {

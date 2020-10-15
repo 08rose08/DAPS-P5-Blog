@@ -11,8 +11,8 @@ class CommentController extends Controller
             $content = $this->checkText($_POST['content']);
 
             $comment = new Comment($content);
-            $comment->setId_post($_GET['id']);
-            $comment->setId_author($_SESSION['id']);
+            $comment->setId_post((int)$_GET['id']);
+            $comment->setId_author((int)$_SESSION['id']);
 
             $commentManager = new CommentManager;
             $affectedLines = $commentManager->addComment($comment); 
@@ -20,7 +20,7 @@ class CommentController extends Controller
             if ($affectedLines === false) {
                 throw new Exception('Impossible d\'ajouter le commentaire!');
             }else{
-                header('Location: index.php?action=getOnePost&id=' . $_GET['id']); // récupérer l'id du post
+                header('Location: index.php?action=getOnePost&id=' . (int)$_GET['id']); // récupérer l'id du post
             }
         }else{
             throw new Exception('Pas de commentaire envoyé');
@@ -41,7 +41,7 @@ class CommentController extends Controller
     {
         if (isset($_SESSION) && $_SESSION['admin'] == 1){
             $commentManager = new CommentManager;
-            $commentManager->deleteComment();
+            $affectedLines = $commentManager->deleteComment();
             if ($affectedLines === false) {
                 throw new Exception('Impossible de supprimer le commentaire!');
             }else{

@@ -8,125 +8,137 @@ try {
         $controller = new IndexController;
         $controller->showIndex();
     }else{
-        switch ($_GET['action']){
-            case 'getPosts':
-                $controller = new PostController;
-                $getPost = $controller->getPosts();
-                break;
-
-            case 'getOnePost': //login
-                if (isset($_SESSION['id']) AND isset($_SESSION['username'])){
-                        $postController = new PostController;
-                        $getOnePost = $postController->getOnePost();                    
+        if (!empty($_GET['action'])){
+            $action = trim($_GET['action']);
+            $action = stripslashes($action);
+            $action = htmlspecialchars($action);
+            switch ($action){
+                case 'getPosts':
+                    $controller = new PostController;
+                    $getPost = $controller->getPosts();
+                    break;
+    
+                case 'getOnePost': //login
+                    if (isset($_SESSION['id']) AND isset($_SESSION['username'])){
+                            $postController = new PostController;
+                            $getOnePost = $postController->getOnePost();                    
+                            break;
+                    }else{
+                        header('Location: index.php?action=showLogin');
+                    }
+    
+                case 'writePost': //admin
+                    if ($_SESSION['admin'] != 1){
+                        
+                    }else{
+                        $controller = new PostController;
+                        $controller->writePost();
                         break;
-                }else{
-                    header('Location: index.php?action=showLogin');
-                }
-
-            case 'writePost': //admin
-                if ($_SESSION['admin'] != 1){
+                    }
+    
+                case 'addPost': //admin
+                    if ($_SESSION['admin'] != 1){
+                        
+                    }else{
+                        $controller = new PostController;
+                        $addPost = $controller->addPost();
+                        break;
+                    }
                     
-                }else{
-                    $controller = new PostController;
-                    $controller->writePost();
-                    break;
-                }
-
-            case 'addPost': //admin
-                if ($_SESSION['admin'] != 1){
-                    
-                }else{
-                    $controller = new PostController;
-                    $addPost = $controller->addPost();
-                    break;
-                }
-                
-            case 'addComment': //login
-                if (isset($_SESSION['id']) AND isset($_SESSION['username'])){
-                    $controller = new CommentController;
-                    $addComment = $controller->addComment();
-                    break;
-                }else{
-                    header('Location: index.php?action=showLogin');
-                }
-
-            case 'showSignup': 
-                $controller = new UserController;
-                $showSignup = $controller->showFormSignup();
-                break;
-
-            case 'signup':
-                $controller = new UserController;
-                $signup = $controller->signup();
-                break;
-
-            case 'showLogin':
-                $controller = new UserController;
-                $showLogin = $controller->showFormLogin();
-                break;
-
-            case 'login':
-                $controller = new UserController;
-                $login = $controller->login();
-                break;
-
-            case 'logout': //login
-                if (isset($_SESSION['id']) AND isset($_SESSION['username'])){
+                case 'addComment': //login
+                    if (isset($_SESSION['id']) AND isset($_SESSION['username'])){
+                        $controller = new CommentController;
+                        $addComment = $controller->addComment();
+                        break;
+                    }else{
+                        header('Location: index.php?action=showLogin');
+                    }
+    
+                case 'showSignup': 
                     $controller = new UserController;
-                    $logout = $controller->logout();
+                    $showSignup = $controller->showFormSignup();
                     break;
-                }else{
-                    header('Location: index.php?action=showLogin');
-                }
-
-
-            case 'showAdmin':
-                //if pas admin -> modal?? 'espace reserve à l'admin"
-                //else if admin 
-                if ($_SESSION['admin'] != 1){
-
-                }else{
+    
+                case 'signup':
+                    $controller = new UserController;
+                    $signup = $controller->signup();
+                    break;
+    
+                case 'showLogin':
+                    $controller = new UserController;
+                    $showLogin = $controller->showFormLogin();
+                    break;
+    
+                case 'login':
+                    $controller = new UserController;
+                    $login = $controller->login();
+                    break;
+    
+                case 'logout': //login
+                    if (isset($_SESSION['id']) AND isset($_SESSION['username'])){
+                        $controller = new UserController;
+                        $logout = $controller->logout();
+                        break;
+                    }else{
+                        header('Location: index.php?action=showLogin');
+                    }
+    
+    
+                case 'showAdmin':
+                    //if pas admin -> modal?? 'espace reserve à l'admin"
+                    //else if admin 
+                    if ($_SESSION['admin'] != 1){
+    
+                    }else{
+                        $controller = new IndexController;
+                        $controller->showAdmin();
+                        break;
+                    }
+    
+                case 'getInvalidComments':
+                    if ($_SESSION['admin'] != 1){
+                    }else{
+                        $controller = new CommentController;
+                        $controller->getInvalidComments();
+                        break;
+                    }
+                case 'deletePost':
+                    if ($_SESSION['admin'] != 1){
+                    }else{
+                        $controller = new PostController;
+                        $controller->deletePost();
+                        break;
+                    }
+                case 'updatePost':
+                    if ($_SESSION['admin'] != 1){
+                    }else{
+                        $controller = new PostController;
+                        $controller->updatePost();
+                        break;
+                    }
+                case 'deleteComment':
+                    if ($_SESSION['admin'] != 1){
+                    }else{
+                        $controller = new CommentController;
+                        $controller->deleteComment();
+                        break;
+                    }
+    
+                case 'validateComment':
+                    if ($_SESSION['admin'] != 1){
+                    }else{
+                        $controller = new CommentController;
+                        $controller->validateComment();
+                        break;
+                    }
+                default:
                     $controller = new IndexController;
-                    $controller->showAdmin();
-                    break;
-                }
+                    $controller->showIndex();
+            }
 
-            case 'getInvalidComments':
-                if ($_SESSION['admin'] != 1){
-                }else{
-                    $controller = new CommentController;
-                    $controller->getInvalidComments();
-                    break;
-                }
-            case 'deletePost':
-                if ($_SESSION['admin'] != 1){
-                }else{
-                    $controller = new PostController;
-                    $controller->deletePost();
-                    break;
-                }
-            case 'updatePost':
-                if ($_SESSION['admin'] != 1){
-                }else{
-                    $controller = new PostController;
-                    $controller->updatePost();
-                    break;
-                }
-            case 'deleteComment':
-                if ($_SESSION['admin'] != 1){
-                }else{
-                    $controller = new CommentController;
-                    $controller->deleteComment();
-                    break;
-                }
-
-            case 'validateComment':
-                if ($_SESSION['admin'] != 1){
-                }else{
-                    $controller = new CommentController;
-                    $controller->validateComment();
-                    break;
-                }
+        }else{
+            $controller = new IndexController;
+            $controller->showIndex();    
         }
     }
 }
