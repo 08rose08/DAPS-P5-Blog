@@ -40,14 +40,14 @@
       </div>
 
       <div class="modal-body">
-        <form method="post" action="index.php?action=updatePost&amp;id=<?= $post->id() ?>" class="mx-lg-5">
+        <form method="post" action="index.php?action=updatePost&amp;id=<?= htmlspecialchars($post->id()) ?>" class="mx-lg-5">
           <div class="form-group">
               <label for="id_author">Auteur</label>
               <select class="custom-select" id="id_author">
                   <option selected>Choisir...</option>
                   <?php foreach ($admins as $admin){ ?>
-                      <option value="<?= $admin->id() ?>">
-                          <?= $admin->username() ?>
+                      <option value="<?= htmlspecialchars($admin->id()) ?>">
+                          <?= htmlspecialchars($admin->username()) ?>
                       </option>
                   <?php } ?>
               </select>
@@ -62,7 +62,7 @@
           </div>
           <div class="form-group">
               <label for="content">Contenu</label>
-              <textarea rows="5" name="content" class="form-control" id ="content" placeholder="Contenu" required><?= $post->content(); ?></textarea>
+              <textarea rows="5" name="content" class="form-control" id ="content" placeholder="Contenu" required><?= htmlspecialchars($post->content()); ?></textarea>
           </div>
       
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>

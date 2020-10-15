@@ -11,8 +11,8 @@ class CommentController extends Controller
             $content = $this->checkForm($_POST['content']);
 
             $comment = new Comment($content);
-            $comment->setId_post((int)$_GET['id']);
-            $comment->setId_author((int)$_SESSION['id']);
+            $comment->setId_post($_GET['id']);
+            $comment->setId_author($_SESSION['id']);
 
             $commentManager = new CommentManager;
             $affectedLines = $commentManager->addComment($comment); 
@@ -55,7 +55,7 @@ class CommentController extends Controller
 
     public function validateComment()
     {
-        if (isset($_SESSION) && $_SESSION['admin'] == 1){
+        if (isset($_GET['id']) && isset($_SESSION) && $_SESSION['admin'] == 1){
             $getId = $this->checkLine($_GET['id']);
             $commentManager = new CommentManager;
             $commentManager->validateComment($getId);
