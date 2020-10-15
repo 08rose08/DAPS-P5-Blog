@@ -64,7 +64,7 @@ class PostManager extends Manager
 
     public function updatePost($post)
     {
-        $getb = $this->dbConnect();
+        $getdb = $this->dbConnect();
         $addPost = $getdb->prepare('UPDATE post SET id_author = :id_author, title = :title, content = :content, last_update_date = NOW(), chapo = :chapo WHERE id = :id');
         $addPost->bindValue(':id_author', $post->id_author());
         $addPost->bindValue(':title', $post->title());

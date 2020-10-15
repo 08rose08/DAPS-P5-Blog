@@ -23,7 +23,7 @@ class PostController extends Controller
     function getOnePost()
     {
         if (isset($_GET['id']) && $_GET['id'] > 0){
-            $getId = $this->checkLine($_GET['id']);
+            $getId = $this->checkForm($_GET['id']);
 
             $commentManager = new CommentManager;
             $comments = $commentManager->getComments($getId);
@@ -57,15 +57,15 @@ class PostController extends Controller
     function addPost()
     {
         if (isset($_POST['id_author']) && isset($_POST['title']) && isset($_POST['content']) && isset($_POST['chapo'])){
-            /*$title = $this->checkLine($_POST['title']);
-            $content = $this->checkText($_POST['content']);
-            $chapo = $this->checkText($_POST['chapo']);*/
+            /*$title = $this->checkForm($_POST['title']);
+            $content = $this->checkForm($_POST['content']);
+            $chapo = $this->checkForm($_POST['chapo']);*/
             
             $data = array(
-                'id_author' => $this->checkLine($_POST['id_author']),
-                'title' => $this->checkLine($_POST['title']),
-                'content'=> $this->checkText($_POST['content']),
-                'chapo' => $this->checkText($_POST['chapo'])
+                'id_author' => $this->checkForm($_POST['id_author']),
+                'title' => $this->checkForm($_POST['title']),
+                'content'=> $this->checkForm($_POST['content']),
+                'chapo' => $this->checkForm($_POST['chapo'])
             );
     
             $post = new Post($data);
@@ -96,7 +96,7 @@ class PostController extends Controller
     function deletePost()
     {
         if (isset($_SESSION) && (int)$_SESSION['admin'] == 1){
-            $getId = $this->checkLine($_GET['id']);
+            $getId = $this->checkForm($_GET['id']);
             $postManager = new PostManager;
             $affectedLines = $postManager->deletePost($getId);
             if ($affectedLines === false) {
@@ -114,11 +114,11 @@ class PostController extends Controller
             
             if (isset($_POST['id_author']) && isset($_POST['title']) && isset($_POST['content']) && isset($_POST['chapo'])){
                 $data = array(
-                    'id_author' => $this->checkLine($_SESSION['id']),
-                    'title' => $this->checkLine($_POST['title']),
-                    'content'=> $this->checkText($_POST['content']),
-                    'chapo' => $this->checkText($_POST['chapo']),
-                    'id' => $this->checkLine($_GET['id'])
+                    'id_author' => $this->checkForm($_SESSION['id']),
+                    'title' => $this->checkForm($_POST['title']),
+                    'content'=> $this->checkForm($_POST['content']),
+                    'chapo' => $this->checkForm($_POST['chapo']),
+                    'id' => $this->checkForm($_GET['id'])
                 );
                 
                 $post = new Post($data);

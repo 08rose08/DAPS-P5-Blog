@@ -8,7 +8,7 @@ class CommentController extends Controller
     function addComment()
     {
         if (isset($_SESSION['id']) && isset($_GET['id']) && isset($_POST['content'])){
-            $content = $this->checkText($_POST['content']);
+            $content = $this->checkForm($_POST['content']);
 
             $comment = new Comment($content);
             $comment->setId_post((int)$_GET['id']);
@@ -40,7 +40,7 @@ class CommentController extends Controller
     public function deleteComment()
     {
         if (isset($_SESSION) && $_SESSION['admin'] == 1){
-            $getId = $this->checkLine($_GET['id']);
+            $getId = $this->checkForm($_GET['id']);
             $commentManager = new CommentManager;
             $affectedLines = $commentManager->deleteComment($getId);
             if ($affectedLines === false) {

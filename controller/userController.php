@@ -27,8 +27,8 @@ class UserController extends Controller
                 throw new Exception('Not the same password');
             }else{
                 //ici vérifier avec les regex
-                $username = $this->checkLine($_POST['username']);
-                $password = $this->checkLine($_POST['password1']);
+                $username = $this->checkForm($_POST['username']);
+                $password = $this->checkForm($_POST['password1']);
 
                 $userManager = new UserManager;
                 $affectedLines = $userManager->signup($username, $password);
@@ -48,8 +48,8 @@ class UserController extends Controller
     public function login()
     {
         if(isset($_POST['username']) && isset($_POST['password'])){
-            $username = $this->checkLine($_POST['username']);
-            $password = $this->checkLine($_POST['password']);
+            $username = $this->checkForm($_POST['username']);
+            $password = $this->checkForm($_POST['password']);
 
             $userManager = new UserManager;
             $user = $userManager->login($username);
