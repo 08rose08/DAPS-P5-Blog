@@ -52,11 +52,11 @@ class PostManager extends Manager
         return $affectedLines;
     }
 
-    public function deletePost()
+    public function deletePost($getId)
     {
         $getdb = $this->dbConnect();
         $req = $getdb->prepare('DELETE FROM post WHERE id = ?');
-        $affectedLines = $req->execute(array((int)$_GET['id']));
+        $affectedLines = $req->execute(array($getId));
 
         return $affectedLines;
  
@@ -70,7 +70,7 @@ class PostManager extends Manager
         $addPost->bindValue(':title', $post->title());
         $addPost->bindValue(':content', $post->content());
         $addPost->bindValue(':chapo', $post->chapo());
-        $addPost->bindValue(':id', (int)$_GET['id']);
+        $addPost->bindValue(':id', $post->id());
 
         $affectedLines = $addPost->execute();
 

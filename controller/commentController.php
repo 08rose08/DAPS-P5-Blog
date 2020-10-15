@@ -40,8 +40,9 @@ class CommentController extends Controller
     public function deleteComment()
     {
         if (isset($_SESSION) && $_SESSION['admin'] == 1){
+            $getId = $this->checkLine($_GET['id']);
             $commentManager = new CommentManager;
-            $affectedLines = $commentManager->deleteComment();
+            $affectedLines = $commentManager->deleteComment($getId);
             if ($affectedLines === false) {
                 throw new Exception('Impossible de supprimer le commentaire!');
             }else{
@@ -55,8 +56,9 @@ class CommentController extends Controller
     public function validateComment()
     {
         if (isset($_SESSION) && $_SESSION['admin'] == 1){
+            $getId = $this->checkLine($_GET['id']);
             $commentManager = new CommentManager;
-            $commentManager->validateComment();
+            $commentManager->validateComment($getId);
             if ($affectedLines === false) {
                 throw new Exception('Impossible de valider le commentaire!');
             }else{

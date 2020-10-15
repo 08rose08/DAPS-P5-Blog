@@ -5,12 +5,12 @@
 
 class CommentManager extends Manager
 {
-    public function getComments()
+    public function getComments($getId)
     {
         $comments = [];
         $getdb = $this->dbConnect();
         $req = $getdb->prepare('SELECT comment.id, comment.id_post, comment.id_author, comment.content, DATE_FORMAT(comment.creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date, user.username FROM comment JOIN user ON comment.id_author = user.id WHERE comment.id_post = ? AND comment.valid = 1 ORDER BY creation_date DESC');
-        $req->execute(array($_GET['id']));
+        $req->execute(array($getId));
 
         while ($data = $req->fetch(PDO::FETCH_ASSOC))
         {
@@ -44,20 +44,20 @@ class CommentManager extends Manager
         return $comments; 
     }
 
-    public function deleteComment()
+    public function deleteComment($getId)
     {
         $getdb = $this->dbConnect();
         $req = $getdb->prepare('DELETE FROM comment WHERE id = ?');
-        $affectedLines = $req->execute(array($_GET['id']));
+        $affectedLines = $req->execute(array($getId));
 
         return $affectedLines;
     }
 
-    public function validateComment()
+    public function validateComment($getId)
     {
         $getdb = $this->dbConnect();
         $req = $getdb->prepare('UPDATE comment SET valid = 1 WHERE id = ?');
-        $affectedLines = $req->execute(array($_GET['id']));
+        $affectedLines = $req->execute(array($getId));
 
         return $affectedLines;
 
