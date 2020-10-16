@@ -14,7 +14,7 @@ class CommentController extends Controller
             $comment = new Comment($postArray);
             $comment->setId_post($getArray['id']);
             $comment->setId_author($sessionArray['id']);
-            var_dump($comment);
+            //var_dump($comment);
 
             $commentManager = new CommentManager;
             $affectedLines = $commentManager->addComment($comment); 
@@ -60,7 +60,7 @@ class CommentController extends Controller
         if (!empty($getArray['id']) && $sessionArray['admin'] == 1){
             //$getId = $this->checkForm($_GET['id']);
             $commentManager = new CommentManager;
-            $commentManager->validateComment($getArray['id']);
+            $affectedLines = $commentManager->validateComment($getArray['id']);
             if ($affectedLines === false) {
                 throw new Exception('Impossible de valider le commentaire!');
             }else{

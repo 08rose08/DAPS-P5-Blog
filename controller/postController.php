@@ -125,7 +125,7 @@ class PostController extends Controller
                     return $this->writePost($post, 'auteur.e non sélectionné.e');
                 }
                 $postManager = new PostManager;
-                $postManager->updatePost($post);
+                $affectedLines = $postManager->updatePost($post);
                 if ($affectedLines === false) {
                     throw new Exception('Impossible de modifier le post!');
                 }else{

@@ -20,7 +20,7 @@ class CommentManager extends Manager
     }
     public function addComment($comment)
     {
-        var_dump($comment);
+        //var_dump($comment);
         $getdb = $this->dbConnect();
         $addComment = $getdb->prepare('INSERT INTO comment VALUES (NULL, :id_post, :id_author, :content, NOW(), 0)');
         $addComment->bindValue(':id_post', $comment->id_post());
