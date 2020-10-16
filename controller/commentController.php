@@ -42,7 +42,6 @@ class CommentController extends Controller
     public function deleteComment($getArray, $sessionArray)
     {
         if ($sessionArray['admin'] == 1){
-            //$getId = $this->checkForm($_GET['id']);
             $commentManager = new CommentManager;
             $affectedLines = $commentManager->deleteComment($getArray['id']);
             if ($affectedLines === false) {

@@ -43,27 +43,15 @@ class PostController extends Controller
     }
     function writePost($post=null, $message=null)
     {
-        /*if (!$post){
-            $post = new Post;
-        }*/
         $userManager = new UserManager;
         $admins = $userManager->getAdmins();
         $view = new View('addPost');
         $view->render(array('admins' => $admins));
-        //require 'view/addPostView.php';
     }
 
     function addPost($postArray)
     {
         if (!empty($postArray['id_author']) && !empty($postArray['title']) && !empty($postArray['content']) && !empty($postArray['chapo'])){
-            /*$data = array(
-                'id_author' => $this->checkForm($postArray['id_author']),
-                'title' => $this->checkForm($postArray['title']),
-                'content'=> $this->checkForm($postArray['content']),
-                'chapo' => $this->checkForm($postArray['chapo'])
-            );*/
-            
-    
             $post = new Post($postArray);
 
             if(empty($post->title())){
@@ -91,7 +79,6 @@ class PostController extends Controller
     function deletePost($getArray, $sessionArray)
     {
         if ($sessionArray['admin'] == 1){
-            //$getId = $this->checkForm($_GET['id']);
             $postManager = new PostManager;
             $affectedLines = $postManager->deletePost($getArray['id']);
             if ($affectedLines === false) {
@@ -107,14 +94,11 @@ class PostController extends Controller
     {
         if ($sessionArray['admin'] == 1){
             if (!empty($postArray['id_author']) && !empty($postArray['title']) && !empty($postArray['content']) && !empty($postArray['chapo'])){
-                $data = array(
-                    'id_author' => $sessionArray['id'],
-                    'title' => $postArray['title'],
-                    'content'=> $postArray['content'],
-                    'chapo' => $postArray['chapo'],
-                    'id' => $getArray['id']
-                );
-                $post = new Post($data);    
+                
+                $post = new Post($postArray);
+                $post->setId($getArray['id']);
+                $post->setId_author($sessionArray['id']);
+                
                 if(empty($post->title())){
                     return $this->writePost($post, 'titre vide');
                 }elseif(empty($post->chapo())){
@@ -126,6 +110,7 @@ class PostController extends Controller
                 }
                 $postManager = new PostManager;
                 $affectedLines = $postManager->updatePost($post);
+
                 if ($affectedLines === false) {
                     throw new Exception('Impossible de modifier le post!');
                 }else{
