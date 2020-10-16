@@ -20,10 +20,9 @@ class PostController extends Controller
         //require 'view/listPostsView.php';
     }
     
-    function getOnePost()
+    function getOnePost($getId)
     {
-        if (isset($_GET['id']) && $_GET['id'] > 0){
-            $getId = $this->checkForm($_GET['id']);
+        if (isset($getId) && $getId > 0){
 
             $commentManager = new CommentManager;
             $comments = $commentManager->getComments($getId);
@@ -54,22 +53,18 @@ class PostController extends Controller
         //require 'view/addPostView.php';
     }
 
-    function addPost()
+    function addPost($postArray)
     {
-        if (isset($_POST['id_author']) && isset($_POST['title']) && isset($_POST['content']) && isset($_POST['chapo'])){
-            /*$title = $this->checkForm($_POST['title']);
-            $content = $this->checkForm($_POST['content']);
-            $chapo = $this->checkForm($_POST['chapo']);*/
+        if (!empty($postArray['id_author']) && !empty($postArray['title']) && !empty($postArray['content']) && !empty($postArray['chapo'])){
+            /*$data = array(
+                'id_author' => $this->checkForm($postArray['id_author']),
+                'title' => $this->checkForm($postArray['title']),
+                'content'=> $this->checkForm($postArray['content']),
+                'chapo' => $this->checkForm($postArray['chapo'])
+            );*/
             
-            $data = array(
-                'id_author' => $this->checkForm($_POST['id_author']),
-                'title' => $this->checkForm($_POST['title']),
-                'content'=> $this->checkForm($_POST['content']),
-                'chapo' => $this->checkForm($_POST['chapo'])
-            );
     
-            $post = new Post($data);
-            //$post->setId_author($_SESSION['id']);
+            $post = new Post($postArray);
 
             if(empty($post->title())){
                 return $this->writePost($post, 'titre vide');
@@ -93,12 +88,12 @@ class PostController extends Controller
         }
 
     }
-    function deletePost()
+    function deletePost($getArray, $sessionArray)
     {
-        if (isset($_SESSION) && (int)$_SESSION['admin'] == 1){
-            $getId = $this->checkForm($_GET['id']);
+        if ($sessionArray['admin'] == 1){
+            //$getId = $this->checkForm($_GET['id']);
             $postManager = new PostManager;
-            $affectedLines = $postManager->deletePost($getId);
+            $affectedLines = $postManager->deletePost($getArray['id']);
             if ($affectedLines === false) {
                 throw new Exception('Impossible de supprimer le post!');
             }else{
@@ -108,22 +103,18 @@ class PostController extends Controller
             throw new Exception('Il faut être admin');
         }
     }
-    function updatePost()
+    function updatePost($getArray, $postArray, $sessionArray)
     {
-        if (isset($_SESSION) && (int)$_SESSION['admin'] == 1){
-            
-            if (isset($_POST['id_author']) && isset($_POST['title']) && isset($_POST['content']) && isset($_POST['chapo'])){
+        if ($sessionArray['admin'] == 1){
+            if (!empty($postArray['id_author']) && !empty($postArray['title']) && !empty($postArray['content']) && !empty($postArray['chapo'])){
                 $data = array(
-                    'id_author' => $this->checkForm($_SESSION['id']),
-                    'title' => $this->checkForm($_POST['title']),
-                    'content'=> $this->checkForm($_POST['content']),
-                    'chapo' => $this->checkForm($_POST['chapo']),
-                    'id' => $this->checkForm($_GET['id'])
+                    'id_author' => $sessionArray['id'],
+                    'title' => $postArray['title'],
+                    'content'=> $postArray['content'],
+                    'chapo' => $postArray['chapo'],
+                    'id' => $getArray['id']
                 );
-                
-                $post = new Post($data);
-                //$post->setId_author($_SESSION['id']);
-    
+                $post = new Post($data);    
                 if(empty($post->title())){
                     return $this->writePost($post, 'titre vide');
                 }elseif(empty($post->chapo())){
@@ -133,7 +124,6 @@ class PostController extends Controller
                 }elseif (empty($post->id_author())) {
                     return $this->writePost($post, 'auteur.e non sélectionné.e');
                 }
-    
                 $postManager = new PostManager;
                 $postManager->updatePost($post);
                 if ($affectedLines === false) {
@@ -142,8 +132,7 @@ class PostController extends Controller
                     header('Location: index.php?action=getPosts');
                 }
             }else{
-                throw new Exception('Donnée.s manquante.s');
-                
+                throw new Exception('Donnée.s manquante.s'); 
             }
         }else{
             throw new Exception('Il faut être admin');

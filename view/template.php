@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="Rose Naudin" />
-        <title><?= $title ?></title>
+        <title><?= htmlspecialchars($title) ?></title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="public/img/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
@@ -55,7 +55,7 @@
 
         <?php
         if ($_SESSION){
-            echo '<div class="bg-black text-white-50 text-center">Bonjour ' . $_SESSION['username'] . '</div>';
+            echo '<div class="bg-black text-white-50 text-center">Bonjour ' . htmlspecialchars($_SESSION['username']) . '</div>';
         }?>
 
         <?= $content ?>

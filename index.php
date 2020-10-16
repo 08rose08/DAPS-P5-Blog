@@ -8,14 +8,20 @@ try {
         $controller = new IndexController;
         $controller->showIndex();
     }elseif (!empty($_GET['action'])){
-        $action = stripslashes($_GET['action']);
-        $action = trim($action);
-        $action = htmlspecialchars($action);
+        //var_dump($_GET);
+        if(empty($_POST)){ $_POST = NULL; }
+        if(empty($_SESSION)){ $_SESSION = NULL; }
+        $request = new Request($_GET,$_POST,$_SESSION);
+        //var_dump($request->get());
+        $getArray = $request->get();
+        //var_dump($get['action']);
+        $postArray = $request->post();
+        $sessionArray = $request->session();
 
-        $admin = (isset($_SESSION['admin']) AND $_SESSION['admin'] == 1);
-        $login = (isset($_SESSION['id']) AND isset($_SESSION['username']));
+        $admin = (isset($sessionArray['admin']) AND $sessionArray['admin'] == 1);
+        $login = (isset($sessionArray['id']) AND isset($sessionArray['username']));
 
-        switch ($action){
+        switch ($getArray['action']){
             case 'getPosts':
                 $controller = new PostController;
                 $getPost = $controller->getPosts();
@@ -24,7 +30,7 @@ try {
             case 'getOnePost': //login
                 if ($login){
                         $postController = new PostController;
-                        $getOnePost = $postController->getOnePost();                    
+                        $getOnePost = $postController->getOnePost($getArray['id']);                    
                         break;
                 }else{
                     header('Location: index.php?action=showLogin');
@@ -42,7 +48,7 @@ try {
             case 'addPost': //admin
                 if ($admin){
                     $controller = new PostController;
-                    $addPost = $controller->addPost();
+                    $addPost = $controller->addPost($postArray);
                     break;
                 }else{
                     header('Location: index.php?action=showLogin');
@@ -51,7 +57,7 @@ try {
             case 'addComment': //login
                 if ($login){
                     $controller = new CommentController;
-                    $addComment = $controller->addComment();
+                    $addComment = $controller->addComment($getArray, $postArray, $sessionArray);
                     break;
                 }else{
                     header('Location: index.php?action=showLogin');
@@ -64,7 +70,7 @@ try {
 
             case 'signup':
                 $controller = new UserController;
-                $signup = $controller->signup();
+                $signup = $controller->signup($postArray);
                 break;
 
             case 'showLogin':
@@ -74,7 +80,7 @@ try {
 
             case 'login':
                 $controller = new UserController;
-                $login = $controller->login();
+                $login = $controller->login($postArray);
                 break;
 
             case 'logout': //login
@@ -110,7 +116,7 @@ try {
             case 'deletePost':
                 if ($admin){
                     $controller = new PostController;
-                    $controller->deletePost();
+                    $controller->deletePost($getArray, $sessionArray);
                     break;
                 }else{
                     header('Location: index.php?action=showLogin');
@@ -119,7 +125,7 @@ try {
             case 'updatePost':
                 if ($admin){
                     $controller = new PostController;
-                    $controller->updatePost();
+                    $controller->updatePost($getArray, $postArray, $sessionArray);
                     break;
                 }else{
                     header('Location: index.php?action=showLogin');
@@ -128,7 +134,7 @@ try {
             case 'deleteComment':
                 if ($admin){
                     $controller = new CommentController;
-                    $controller->deleteComment();
+                    $controller->deleteComment($getArray, $sessionArray);
                     break;
                 }else{
                     header('Location: index.php?action=showLogin');
@@ -137,7 +143,7 @@ try {
             case 'validateComment':
                 if ($admin){
                     $controller = new CommentController;
-                    $controller->validateComment();
+                    $controller->validateComment($getArray, $sessionArray);
                     break;
                 }else{
                     header('Location: index.php?action=showLogin');

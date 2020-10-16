@@ -5,14 +5,16 @@
 class CommentController extends Controller
 {
 
-    function addComment()
+    function addComment($getArray, $postArray, $sessionArray)
     {
-        if (isset($_SESSION['id']) && isset($_GET['id']) && isset($_POST['content'])){
-            $content = $this->checkForm($_POST['content']);
+        if (!empty($sessionArray['id']) && !empty($getArray['id']) && !empty($postArray['content'])){
+            //$content = $this->checkForm($_POST['content']);
+            //$getId = $this->checkForm($_GET['id']);
 
-            $comment = new Comment($content);
-            $comment->setId_post($_GET['id']);
-            $comment->setId_author($_SESSION['id']);
+            $comment = new Comment($postArray);
+            $comment->setId_post($getArray['id']);
+            $comment->setId_author($sessionArray['id']);
+            var_dump($comment);
 
             $commentManager = new CommentManager;
             $affectedLines = $commentManager->addComment($comment); 
@@ -20,7 +22,7 @@ class CommentController extends Controller
             if ($affectedLines === false) {
                 throw new Exception('Impossible d\'ajouter le commentaire!');
             }else{
-                header('Location: index.php?action=getOnePost&id=' . (int)$_GET['id']); // récupérer l'id du post
+                header('Location: index.php?action=getOnePost&id=' . $getArray['id']); // récupérer l'id du post
             }
         }else{
             throw new Exception('Pas de commentaire envoyé');
@@ -37,12 +39,12 @@ class CommentController extends Controller
 
     }
 
-    public function deleteComment()
+    public function deleteComment($getArray, $sessionArray)
     {
-        if (isset($_SESSION) && $_SESSION['admin'] == 1){
-            $getId = $this->checkForm($_GET['id']);
+        if ($sessionArray['admin'] == 1){
+            //$getId = $this->checkForm($_GET['id']);
             $commentManager = new CommentManager;
-            $affectedLines = $commentManager->deleteComment($getId);
+            $affectedLines = $commentManager->deleteComment($getArray['id']);
             if ($affectedLines === false) {
                 throw new Exception('Impossible de supprimer le commentaire!');
             }else{
@@ -53,12 +55,12 @@ class CommentController extends Controller
         }
     }
 
-    public function validateComment()
+    public function validateComment($getArray, $sessionArray)
     {
-        if (isset($_GET['id']) && isset($_SESSION) && $_SESSION['admin'] == 1){
-            $getId = $this->checkLine($_GET['id']);
+        if (!empty($getArray['id']) && $sessionArray['admin'] == 1){
+            //$getId = $this->checkForm($_GET['id']);
             $commentManager = new CommentManager;
-            $commentManager->validateComment($getId);
+            $commentManager->validateComment($getArray['id']);
             if ($affectedLines === false) {
                 throw new Exception('Impossible de valider le commentaire!');
             }else{

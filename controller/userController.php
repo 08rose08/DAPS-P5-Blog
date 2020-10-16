@@ -20,18 +20,18 @@ class UserController extends Controller
         //require 'view/loginView.php';
     }
 
-    public function signup()
+    public function signup($postArray)
     {
-        if (isset($_POST['username']) &&  isset($_POST['password1']) && isset($_POST['password2'])){
-            if ($_POST['password1'] != $_POST['password2']){
+        if (isset($postArray['username']) &&  isset($postArray['password1']) && isset($postArray['password2'])){
+            if ($postArray['password1'] != $postArray['password2']){
                 throw new Exception('Not the same password');
             }else{
                 //ici vérifier avec les regex
-                $username = $this->checkForm($_POST['username']);
-                $password = $this->checkForm($_POST['password1']);
+                //$username = $this->checkForm($_POST['username']);
+                //$password = $this->checkForm($_POST['password1']);
 
                 $userManager = new UserManager;
-                $affectedLines = $userManager->signup($username, $password);
+                $affectedLines = $userManager->signup($postArray['username'], $postArray['password1']);
 
                 if ($affectedLines === false) {
                     throw new Exception('Impossible d\'ajouter l\'utilisateur');
@@ -45,16 +45,16 @@ class UserController extends Controller
         }
     }
 
-    public function login()
+    public function login($postArray)
     {
-        if(isset($_POST['username']) && isset($_POST['password'])){
-            $username = $this->checkForm($_POST['username']);
-            $password = $this->checkForm($_POST['password']);
+        if(isset($postArray['username']) && isset($postArray['password'])){
+            //$username = $this->checkForm($_POST['username']);
+            //$password = $this->checkForm($_POST['password']);
 
             $userManager = new UserManager;
-            $user = $userManager->login($username);
+            $user = $userManager->login($postArray['username']);
             
-            $isPasswordCorrect = password_verify($password, $user->pass());
+            $isPasswordCorrect = password_verify($postArray['password'], $user->pass());
 
             if (!$user) {
                 throw new Exception('Mauvais identifiant ou mot de passe !');
@@ -67,7 +67,7 @@ class UserController extends Controller
                     $_SESSION['id'] = $user->id();
                     $_SESSION['username'] = $user->username();
                     $_SESSION['admin'] = $user->admin();
-                    var_dump($_SESSION);
+                    //var_dump($_SESSION);
 
                     header('Location: index.php?action=getPosts');
                     

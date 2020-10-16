@@ -43,7 +43,7 @@
         <form method="post" action="index.php?action=updatePost&amp;id=<?= htmlspecialchars($post->id()) ?>" class="mx-lg-5">
           <div class="form-group">
               <label for="id_author">Auteur</label>
-              <select class="custom-select" id="id_author">
+              <select class="custom-select" id="id_author" name="id_author">
                   <option selected>Choisir...</option>
                   <?php foreach ($admins as $admin){ ?>
                       <option value="<?= htmlspecialchars($admin->id()) ?>">
