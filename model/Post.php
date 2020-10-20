@@ -8,7 +8,8 @@ class Post
             $_title,
             $_content,
             $_last_update_date,
-            $_chapo;
+            $_chapo,
+            $_picture;
 
     public function __construct(array $data) //Qd je fais new Post(['title' => $_Post['title']]), va être appelé par addPost() 
     {
@@ -56,6 +57,10 @@ class Post
     public function chapo()
     {
         return $this->_chapo;
+    }
+    public function picture()
+    {
+        return $this->_picture;
     }
 
     //setter
@@ -108,6 +113,13 @@ class Post
         if (is_string ($chapo))
         {
             $this->_chapo = $chapo;
+        }
+    }
+    public function setPicture($picture)
+    {
+        if (is_string($picture))
+        {
+            $this->_picture = $picture;
         }
     }
 }

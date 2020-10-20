@@ -10,7 +10,7 @@ class PostManager extends Manager
     {
         $posts = [];
         $getdb = $this->dbConnect();
-        $req = $getdb->query('SELECT post.id, post.id_author, post.title, post.content, post.chapo, DATE_FORMAT(post.last_update_date, \'%d/%m/%Y à %Hh%imin%ss\') AS last_update_date, user.username FROM post JOIN user ON post.id_author = user.id ORDER BY post.last_update_date DESC');
+        $req = $getdb->query('SELECT post.id, post.id_author, post.title, post.content, post.chapo, DATE_FORMAT(post.last_update_date, \'%d/%m/%Y à %Hh%imin%ss\') AS last_update_date, post.picture, user.username FROM post JOIN user ON post.id_author = user.id ORDER BY post.last_update_date DESC');
         //var_dump($req);
         while ($data = $req->fetch(PDO::FETCH_ASSOC))
         {
@@ -28,7 +28,7 @@ class PostManager extends Manager
     public function getOnePost($getId)
     {
         $getdb = $this->dbConnect();
-        $req = $getdb->prepare('SELECT post.id, post.id_author, post.title, post.content, post.chapo, DATE_FORMAT(post.last_update_date, \'%d/%m/%Y à %Hh%imin%ss\') AS last_update_date, user.username FROM post JOIN user ON post.id_author = user.id WHERE post.id = ?');
+        $req = $getdb->prepare('SELECT post.id, post.id_author, post.title, post.content, post.chapo, DATE_FORMAT(post.last_update_date, \'%d/%m/%Y à %Hh%imin%ss\') AS last_update_date, post.picture, user.username FROM post JOIN user ON post.id_author = user.id WHERE post.id = ?');
         $req->execute(array($getId));
         $data = $req->fetch();
         $post = new Post($data);
@@ -40,7 +40,7 @@ class PostManager extends Manager
 
 
         $getdb = $this->dbConnect();
-        $addPost = $getdb->prepare('INSERT INTO post VALUES (NULL, :id_author, :title, :content, NOW(), :chapo)');
+        $addPost = $getdb->prepare('INSERT INTO post VALUES (NULL, :id_author, :title, :content, NOW(), :chapo, NULL)');
         $addPost->bindValue(':id_author', $post->id_author());
         $addPost->bindValue(':title', $post->title());
         $addPost->bindValue(':content', $post->content());
@@ -73,6 +73,19 @@ class PostManager extends Manager
         $addPost->bindValue(':id', $post->id());
 
         $affectedLines = $addPost->execute();
+
+        return $affectedLines;
+
+    }
+    
+    public function addPicture($postId, $src)
+    {
+        $getdb = $this->dbConnect();
+        $addPicture = $getdb->prepare('UPDATE post SET picture = :src WHERE id = :id');
+        $addPicture->bindValue(':src', $src);
+        $addPicture->bindValue(':id', $postId);
+
+        $affectedLines = $addPicture->execute();
 
         return $affectedLines;
 

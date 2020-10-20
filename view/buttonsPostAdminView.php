@@ -38,33 +38,42 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+      <?php 
+        if (!empty($message)){
+            echo ($message);
+        } 
+      ?>
 
       <div class="modal-body">
-        <form method="post" action="index.php?action=updatePost&amp;id=<?= htmlspecialchars($post->id()) ?>" class="mx-lg-5">
+        <form method="post" action="index.php?action=updatePost&amp;id=<?= $post->id() ?>" enctype="multipart/form-data" class="mx-lg-5">
           <div class="form-group">
               <label for="id_author">Auteur</label>
               <select class="custom-select" id="id_author" name="id_author">
                   <option selected>Choisir...</option>
                   <?php foreach ($admins as $admin){ ?>
-                      <option value="<?= htmlspecialchars($admin->id()) ?>">
-                          <?= htmlspecialchars($admin->username()) ?>
+                      <option value="<?= $admin->id() ?>">
+                          <?= $admin->username() ?>
                       </option>
                   <?php } ?>
               </select>
           </div>
           <div class="form-group">
               <label for="title">Titre</label>
-              <input value="<?= $post->title(); ?>" type="text" name="title" class="form-control" id ="title" placeholder="Titre" required />
+              <input value="<?php if(!empty($postUp)){echo $postUp->title();}else{echo $post->title();} ?>" type="text" name="title" class="form-control" id ="title" placeholder="Titre" required />
           </div>
           <div class="form-group">
               <label for="chapo">Chapô</label>
-              <input value="<?= $post->chapo(); ?>" type="text" name="chapo" class="form-control" id ="chapo" placeholder="Chapô" required />
+              <input value="<?php if(!empty($postUp)){echo $postUp->chapo();}else{echo $post->chapo();} ?>" type="text" name="chapo" class="form-control" id ="chapo" placeholder="Chapô" required />
           </div>
           <div class="form-group">
               <label for="content">Contenu</label>
-              <textarea rows="5" name="content" class="form-control" id ="content" placeholder="Contenu" required><?= htmlspecialchars($post->content()); ?></textarea>
+              <textarea rows="5" name="content" class="form-control" id ="content" placeholder="Contenu" required><?php if(!empty($postUp)){echo $postUp->content();}else{echo $post->content();} ?></textarea>
           </div>
-      
+          <div class="form-group">
+            <label for="picture"> Modifier la photo (.png, .jpg, .jpeg, max 1Mo) :</label>
+            <input type="file" name="picture" id="picture" accept="image/png, image/jpeg, image/jpg" />
+          </div>
+
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
           <button type="submit" class="btn btn-primary">Modifier</button>
         </form>
