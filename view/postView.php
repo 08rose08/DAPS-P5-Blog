@@ -6,7 +6,7 @@
 <main class="bg-black p-3">
     <div class="card card-body bg-light m-3 p-3">
         <div class="d-flex flex-column">
-            <div class="d-flex flex-row justify-content-between">
+            <div class="d-flex flex-column flex-md-row justify-content-between">
                 <img src="<?= $post->picture() ?>" class="border rounded mr-md-3" width="200" height="200" alt="photo de la recette">
                 <div class="d-flex flex-column">
 

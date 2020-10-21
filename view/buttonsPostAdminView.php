@@ -59,15 +59,15 @@
           </div>
           <div class="form-group">
               <label for="title">Titre</label>
-              <input value="<?php if(!empty($postUp)){echo $postUp->title();}else{echo $post->title();} ?>" type="text" name="title" class="form-control" id ="title" placeholder="Titre" required />
+              <input value="<?php if(!empty($postUp)){echo $postUp->title();}else{echo $postBB->title();} ?>" type="text" name="title" class="form-control" id ="title" placeholder="Titre" required />
           </div>
           <div class="form-group">
               <label for="chapo">Chapô</label>
-              <input value="<?php if(!empty($postUp)){echo $postUp->chapo();}else{echo $post->chapo();} ?>" type="text" name="chapo" class="form-control" id ="chapo" placeholder="Chapô" required />
+              <input value="<?php if(!empty($postUp)){echo $postUp->chapo();}else{echo $postBB->chapo();} ?>" type="text" name="chapo" class="form-control" id ="chapo" placeholder="Chapô" required />
           </div>
           <div class="form-group">
               <label for="content">Contenu</label>
-              <textarea rows="5" name="content" class="form-control" id ="content" placeholder="Contenu" required><?php if(!empty($postUp)){echo $postUp->content();}else{echo $post->content();} ?></textarea>
+              <textarea rows="5" name="content" class="form-control" id ="content" placeholder="Contenu" required><?php if(!empty($postUp)){echo $postUp->content();}else{echo $postBB->content();} ?></textarea>
           </div>
           <div class="form-group">
             <label for="picture"> Modifier la photo (.png, .jpg, .jpeg, max 1Mo) :</label>

@@ -33,8 +33,10 @@ class PostController extends Controller
             $userManager = new UserManager;
             $admins = $userManager->getAdmins();    
 
+            $postBB = $this->switchBB($post);
+
             $view = new View('post');
-            $view->render(array('post' => $post, 'comments' => $comments, 'admins' => $admins));
+            $view->render(array('post' => $post, 'comments' => $comments, 'admins' => $admins, 'postBB' => $postBB));
             //require 'view/postView.php';
         }else{
             throw new Exception('Aucun id de post envoyé');
