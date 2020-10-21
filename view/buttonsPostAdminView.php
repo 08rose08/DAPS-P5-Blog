@@ -1,4 +1,4 @@
-<div class="d-flex flex-column">
+<div class="d-flex flex-column mr-md-3">
     <button type="button" class="btn btn-primary p-1" data-toggle="modal" data-target="#deleteModal"><i class="far fa-trash-alt"></i></button>
     <button type="button" class="btn btn-primary p-1 mt-1" data-toggle="modal" data-target="#postUpdateModal"><i class="fas fa-pencil-alt"></i></button>
     
@@ -63,7 +63,7 @@
           </div>
           <div class="form-group">
               <label for="chapo">Chapô</label>
-              <input value="<?php if(!empty($postUp)){echo $postUp->chapo();}else{echo $postBB->chapo();} ?>" type="text" name="chapo" class="form-control" id ="chapo" placeholder="Chapô" required />
+              <textarea  rows="4" name="chapo" class="form-control" id ="chapo" placeholder="Chapô" required><?php if(!empty($postUp)){echo $postUp->chapo();}else{echo $postBB->chapo();} ?></textarea>
           </div>
           <div class="form-group">
               <label for="content">Contenu</label>

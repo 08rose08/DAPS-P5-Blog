@@ -27,7 +27,7 @@ if (!empty($message)){
         </div>
         <div class="form-group">
             <label for="chapo">Chapô</label>
-            <input value="<?php if(!empty($post)){echo $post->chapo();}; ?>" type="text" name="chapo" class="form-control" id ="chapo" placeholder="Chapô" required />
+            <textarea rows="4" name="chapo" class="form-control" id ="chapo" placeholder="Chapô" required><?php if(!empty($post)){echo $post->chapo();}; ?></textarea>
         </div>
         <div class="form-group">
             <label for="content">Contenu</label>
