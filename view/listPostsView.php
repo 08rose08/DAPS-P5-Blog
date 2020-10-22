@@ -21,4 +21,9 @@
             
         </div>
     <?php } ?>
+    <p class="text-center"><?php for ($i = 1 ; $i <= $nbPages ; $i++)  
+        {  
+            echo '<a href="index.php?action=getPosts&numPage=' . $i . '">' . $i . '</a> ';  
+        } ?>
+    </p>
 </main>

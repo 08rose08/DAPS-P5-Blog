@@ -24,7 +24,8 @@ try {
         switch ($getArray['action']){
             case 'getPosts':
                 $controller = new PostController;
-                $getPost = $controller->getPosts();
+                //$getPost = $controller->getPosts();
+                $getPosts = $controller->getPostsPage($getArray['numPage']);
                 break;
     
             case 'getOnePost': //login

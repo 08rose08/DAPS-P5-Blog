@@ -24,6 +24,34 @@ class PostManager extends Manager
         
         return $posts;  
     }
+    public function nbPosts()
+    {
+        $getdb = $this->dbConnect();
+        $req = $getdb->query('SELECT COUNT(*) AS nb_posts FROM post');
+        $data = $req->fetch();
+        return $data['nb_posts'];
+
+    }
+
+    public function getPostsPage($post1, $nbPostsPage)
+    {
+        //var_dump($post1);
+        //var_dump($nbPostsPage);
+        $posts = [];
+        $getdb = $this->dbConnect();
+        $req = $getdb->prepare('SELECT post.id, post.id_author, post.title, post.content, post.chapo, DATE_FORMAT(post.last_update_date, \'%d/%m/%Y à %Hh%imin%ss\') AS last_update_date, post.picture, user.username FROM post JOIN user ON post.id_author = user.id ORDER BY post.last_update_date DESC LIMIT '.$post1.' , '.$nbPostsPage );
+        //$req->bindValue(':post', $post1);
+        //$req->bindValue(':nbPostsPage', $nbPostsPage);
+        $req->execute();
+
+        while ($data = $req->fetch(PDO::FETCH_ASSOC))
+        {
+            //var_dump('dans le while');
+            $posts[] = new Post($data);
+
+        }
+        return $posts;
+    }
 
     public function getOnePost($getId)
     {
@@ -46,7 +74,6 @@ class PostManager extends Manager
         $addPost->bindValue(':content', $post->content());
         $addPost->bindValue(':chapo', $post->chapo());
 
-
         $affectedLines = $addPost->execute();
 
         return $affectedLines;
@@ -65,14 +92,14 @@ class PostManager extends Manager
     public function updatePost($post)
     {
         $getdb = $this->dbConnect();
-        $addPost = $getdb->prepare('UPDATE post SET id_author = :id_author, title = :title, content = :content, last_update_date = NOW(), chapo = :chapo WHERE id = :id');
-        $addPost->bindValue(':id_author', $post->id_author());
-        $addPost->bindValue(':title', $post->title());
-        $addPost->bindValue(':content', $post->content());
-        $addPost->bindValue(':chapo', $post->chapo());
-        $addPost->bindValue(':id', $post->id());
+        $updatePost = $getdb->prepare('UPDATE post SET id_author = :id_author, title = :title, content = :content, last_update_date = NOW(), chapo = :chapo WHERE id = :id');
+        $updatePost->bindValue(':id_author', $post->id_author());
+        $updatePost->bindValue(':title', $post->title());
+        $updatePost->bindValue(':content', $post->content());
+        $updatePost->bindValue(':chapo', $post->chapo());
+        $updatePost->bindValue(':id', $post->id());
 
-        $affectedLines = $addPost->execute();
+        $affectedLines = $updatePost->execute();
 
         return $affectedLines;
 

@@ -19,7 +19,25 @@ class PostController extends Controller
 
         //require 'view/listPostsView.php';
     }
-    
+
+    function getPostsPage($numPage)
+    {   
+        if(empty($numPage)) {$numPage = 1;}
+        $postManager = new PostManager;
+        $nbPosts = $postManager->nbPosts();
+        $nbPostsPage = 5;
+        $nbPages = ceil($nbPosts / $nbPostsPage);
+        $post1 = ($numPage - 1) * $nbPostsPage;
+        $posts = $postManager->getPostsPage($post1, $nbPostsPage);
+        //var_dump($posts);
+        $userManager = new UserManager;
+        $admins = $userManager->getAdmins();
+
+        $view = new View('listPosts');
+        $view->render(array('posts' => $posts, 'admins' => $admins, 'nbPages' => $nbPages));
+
+        //require 'view/listPostsView.php';
+    }    
     function getOnePost($getId, $postUp=null, $messageUp=null)
     {
         if (isset($getId) && $getId > 0){
@@ -67,7 +85,7 @@ class PostController extends Controller
             }
 
             $postManager = new PostManager;
-            $affectedLines = $postManager->addPost($post); //???
+            $affectedLines = $postManager->addPost($post);
             if ($affectedLines === false) {
                 throw new Exception('Impossible d\'ajouter le post!');
             }else{

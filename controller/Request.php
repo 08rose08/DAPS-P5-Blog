@@ -12,6 +12,9 @@ class Request extends Controller
         
         if(!empty($get['action'])){$this->get['action'] = $this->checkForm($get['action']);}
         if(!empty($get['id'])){$this->get['id'] = $this->checkForm($get['id']);}
+        if(!empty($get['numPage'])){$this->get['numPage'] = $this->checkForm($get['numPage']);
+        }else{$this->get['numPage'] = 1;}
+
         //var_dump($this->get);
 
         $this->post = $post;
