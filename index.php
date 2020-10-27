@@ -22,6 +22,11 @@ try {
         $login = (isset($sessionArray['id']) AND isset($sessionArray['username']));
 
         switch ($getArray['action']){
+            case 'legal':
+                $controller = new IndexController;
+                $controller->showLegal();
+                break;
+                
             case 'getPosts':
                 $controller = new PostController;
                 //$getPost = $controller->getPosts();

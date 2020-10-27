@@ -78,6 +78,7 @@
                     echo '<div class=""><a href="index.php?action=showAdmin">Admin</a></div>';
                 }else{}
             ?>
+            <div><a href="index.php?action=legal">Mentions légales</a></div>
             <div class="container">Copyright © ThePinkMuffin 2020</div>
         </footer>
 

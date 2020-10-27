@@ -7,7 +7,7 @@ class UserManager extends Manager
 {
     public function signup($username, $password)
     {
-        if ($this->alreadyExist($username)){
+        if ($this->alreadyExists($username)){
             throw new Exception('Username already exists');
 
         }else{
@@ -30,7 +30,7 @@ class UserManager extends Manager
         }
     }
 
-    public function alreadyExist($username)
+    public function alreadyExists($username)
     {
         $getdb = $this->dbConnect();
         $req = $getdb->prepare('SELECT username FROM user WHERE username = ?');
