@@ -13,7 +13,7 @@
                 <div class="d-flex flex-column">
                     <h2><a href='index.php?action=getOnePost&amp;id=<?= $post->id() ?>'><?= $post->title() ?></a></h2>
                     <p><?= $post->chapo() ?></p>
-                    <p>Par <?= $post->username() ?> le <?= $post->last_update_date() ?></p>
+                    <p><em>Par <?= $post->username() ?> le <?= $post->last_update_date() ?></em></p>
                 </div>
             
 

@@ -4434,6 +4434,10 @@ input[type=button].btn-block {
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
 }
+.card img {
+  width: 200px;
+  height: 200px;
+}
 .card > hr {
   margin-right: 0;
   margin-left: 0;
