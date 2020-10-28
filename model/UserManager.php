@@ -45,16 +45,20 @@ class UserManager extends Manager
 
     }
     public function login($username)
-    {
-        $getdb = $this->dbConnect();
-        $req = $getdb->prepare('SELECT * FROM user WHERE username = ?');
-        $req->execute(array($username));
-        $data = $req->fetch();
-        //if $data est ok tableau
-        $user = new User($data);
-
-        return $user;
-
+    {   
+        if ($this->alreadyExists($username)){
+            $getdb = $this->dbConnect();
+            $req = $getdb->prepare('SELECT * FROM user WHERE username = ?');
+            $req->execute(array($username));
+            $data = $req->fetch();
+            //if $data est ok tableau
+            $user = new User($data);
+            
+            return $user;
+            
+        }else{
+            throw new Exception('Mauvais identifiant ou mot de passe !');
+        }
         
     }
 
