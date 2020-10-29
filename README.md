@@ -1,7 +1,7 @@
 <a href="https://codeclimate.com/github/08rose08/DAPS-P5-Blog/maintainability"><img src="https://api.codeclimate.com/v1/badges/9ec80925ccfa7167b1ee/maintainability" /></a>
 
 # Path : App developer PHP/Symfony - Project 5 - Blog
-<a href="https://openclassrooms.com/fr/paths/59-developpeur-dapplication-php-symfony">App developer with Openclassrooms</a>
+<a href="https://openclassrooms.com/fr/paths/59-developpeur-dapplication-php-symfony">App developer with Openclassrooms</a><br>
 Create your first blog - PHP, Bootstrap and SQL. You will need wamp/mamp ;)
 
 ## Context
