@@ -1,3 +1,5 @@
+<a href="https://codeclimate.com/github/08rose08/DAPS-P5-Blog/maintainability"><img src="https://api.codeclimate.com/v1/badges/9ec80925ccfa7167b1ee/maintainability" /></a>
+
 # DAPS-P5-Blog
 Create your first blog - PHP, Bootstrap and SQL
 
