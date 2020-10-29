@@ -1,6 +1,6 @@
 <?php 
     $this->title = 'Blog : admin';
-    $this->page = 'Moderation';
+    $this->page = 'Admin';
 ?>
 
 <main class="bg-black p-3">
