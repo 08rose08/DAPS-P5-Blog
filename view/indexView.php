@@ -224,7 +224,7 @@
                 <h2 class="text-center text-white-50">Around the web</h2>
                 <div class="social d-flex justify-content-center">
                     <a class="mx-2" href="https://www.linkedin.com/in/naudin-rose/"><i class="fab fa-linkedin-in"></i></a>
-                    <a class="mx-2" href="#!"><i class="fas fa-at"></i></a>
+                    <a class="mx-2" href="mailto:naudinrose@gmail.com"><i class="fas fa-at"></i></a>
                     <a class="mx-2" href="https://github.com/08rose08/"><i class="fab fa-github"></i></a>
                 </div>
             </div>
