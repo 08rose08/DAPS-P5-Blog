@@ -2,7 +2,7 @@
 
 # Path : App developer PHP/Symfony - Project 5 - Blog
 <a href="https://openclassrooms.com/fr/paths/59-developpeur-dapplication-php-symfony">App developer with Openclassrooms</a><br>
-Create your first blog - PHP, Bootstrap and SQL. You will need wamp/mamp ;)
+Create your first blog - PHP, Bootstrap and SQL.
 
 ## Context
 'That's it, you took the plunge! The world of web development with PHP is at your fingertips and you need visibility to be able to convince your future employers / clients at a glance. You are a PHP developer, so now is the time to show your talents through a blog in your colors.'
@@ -18,3 +18,6 @@ Create your first blog - PHP, Bootstrap and SQL. You will need wamp/mamp ;)
   * Create a web page to collect the information entered by an Internet user
   * Conceptualize your entire application by describing its structure (Entities / Domain Objects)
   * Write detailed project specifications
+
+## Let's go
+You need to adapt the config.php and the /public/mail/contact_me.php (email) ;)
