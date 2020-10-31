@@ -1,20 +1,14 @@
 <?php
 
-//require 'model/CommentManager.php';
-
 class CommentController extends Controller
 {
 
     function addComment($getArray, $postArray, $sessionArray)
     {
         if (!empty($sessionArray['id']) && !empty($getArray['id']) && !empty($postArray['content'])){
-            //$content = $this->checkForm($_POST['content']);
-            //$getId = $this->checkForm($_GET['id']);
-
             $comment = new Comment($postArray);
             $comment->setId_post($getArray['id']);
             $comment->setId_author($sessionArray['id']);
-            //var_dump($comment);
 
             $commentManager = new CommentManager;
             $affectedLines = $commentManager->addComment($comment); 
@@ -22,7 +16,7 @@ class CommentController extends Controller
             if ($affectedLines === false) {
                 throw new Exception('Impossible d\'ajouter le commentaire!');
             }else{
-                header('Location: index.php?action=getOnePost&id=' . $getArray['id']); // récupérer l'id du post
+                header('Location: index.php?action=getOnePost&id=' . $getArray['id']); 
             }
         }else{
             throw new Exception('Pas de commentaire envoyé');
@@ -57,7 +51,6 @@ class CommentController extends Controller
     public function validateComment($getArray, $sessionArray)
     {
         if (!empty($getArray['id']) && $sessionArray['admin'] == 1){
-            //$getId = $this->checkForm($_GET['id']);
             $commentManager = new CommentManager;
             $affectedLines = $commentManager->validateComment($getArray['id']);
             if ($affectedLines === false) {
@@ -68,6 +61,5 @@ class CommentController extends Controller
         }else{
             throw new Exception('Il faut être admin');
         }
-
     }
 }

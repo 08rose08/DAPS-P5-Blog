@@ -8,10 +8,10 @@
     foreach ($comments as $comment){
     ?>
         <div class="card card-body  bg-light m-3 p-3">
-            <p class="card-text "><?= htmlspecialchars($comment->content()) ?></p>
-            <p class="card-text font-italic">Par <?= htmlspecialchars($comment->username()) ?> le <?= htmlspecialchars($comment->creation_date()) ?></p>
+            <p class="card-text "><?= $comment->content() ?></p>
+            <p class="card-text font-italic">Par <?= $comment->username() ?> le <?= $comment->creation_date() ?></p>
             <p>
-                <a href="index.php?action=validateComment&amp;id=<?= htmlspecialchars($comment->id()) ?>" class="btn btn-primary col-md-4 mt-1">Valider</a>
+                <a href="index.php?action=validateComment&amp;id=<?= $comment->id() ?>" class="btn btn-primary col-md-4 mt-1">Valider</a>
                 <button type="button" class="btn btn-danger col-md-4 mt-1" data-toggle="modal" data-target="#deleteCommentModal">Supprimer</button>
             </p>
         </div>
@@ -27,7 +27,7 @@
                     </div>
 
                     <div class="modal-body">
-                        <form method="post" action="index.php?action=deleteComment&amp;id=<?= htmlspecialchars($comment->id()) ?>">
+                        <form method="post" action="index.php?action=deleteComment&amp;id=<?= $comment->id() ?>">
                             <div class="form-group">
                                 Attention, la supression du commentaire est définitive.
                             </div>

@@ -1,8 +1,5 @@
 <?php
 
-//require_once 'Manager.php';
-//require 'Post.php';
-
 class PostManager extends Manager
 {
    //CRUD
@@ -11,32 +8,23 @@ class PostManager extends Manager
         $posts = [];
         $getdb = $this->dbConnect();
         $req = $getdb->query('SELECT post.id, post.id_author, post.title, post.content, post.chapo, DATE_FORMAT(post.last_update_date, \'%d/%m/%Y à %Hh%imin%ss\') AS last_update_date, post.picture, user.username FROM post JOIN user ON post.id_author = user.id ORDER BY post.last_update_date DESC');
-        //var_dump($req);
         while ($data = $req->fetch(PDO::FETCH_ASSOC))
         {
             $posts[] = new Post($data);
         }
-        
-        /**
-         * $req->setFetchMode(PDO::FETCH_CLASS, 'Post');
-         * $post = $req->fetch()
-         */
-        
         return $posts;  
     }
+
     public function nbPosts()
     {
         $getdb = $this->dbConnect();
         $req = $getdb->query('SELECT COUNT(*) AS nb_posts FROM post');
         $data = $req->fetch();
         return $data['nb_posts'];
-
     }
 
     public function getPostsPage($post1, $nbPostsPage)
     {
-        //var_dump($post1);
-        //var_dump($nbPostsPage);
         $posts = [];
         $getdb = $this->dbConnect();
         $req = $getdb->prepare('SELECT post.id, post.id_author, post.title, post.content, post.chapo, DATE_FORMAT(post.last_update_date, \'%d/%m/%Y à %Hh%imin%ss\') AS last_update_date, post.picture, user.username FROM post JOIN user ON post.id_author = user.id ORDER BY post.last_update_date DESC LIMIT :post , :nbPostsPage' );
@@ -46,9 +34,7 @@ class PostManager extends Manager
 
         while ($data = $req->fetch(PDO::FETCH_ASSOC))
         {
-            //var_dump('dans le while');
             $posts[] = new Post($data);
-
         }
         return $posts;
     }
@@ -84,7 +70,6 @@ class PostManager extends Manager
         $affectedLines = $req->execute(array($getId));
 
         return $affectedLines;
- 
     }
 
     public function updatePost($post)
@@ -100,7 +85,6 @@ class PostManager extends Manager
         $affectedLines = $updatePost->execute();
 
         return $affectedLines;
-
     }
     
     public function addPicture($postId, $src)
@@ -113,6 +97,5 @@ class PostManager extends Manager
         $affectedLines = $addPicture->execute();
 
         return $affectedLines;
-
     }
 }

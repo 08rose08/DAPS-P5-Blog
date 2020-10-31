@@ -1,8 +1,5 @@
 <?php
 
-//require_once 'Manager.php';
-//require_once 'User.php';
-
 class UserManager extends Manager
 {
     public function signup($username, $password)
@@ -26,7 +23,6 @@ class UserManager extends Manager
             $affectedLines = $addUser->execute();
 
             return $affectedLines;
-
         }
     }
 
@@ -40,7 +36,6 @@ class UserManager extends Manager
             return true;
         }else{
             return false;
-
         }
 
     }
@@ -51,15 +46,13 @@ class UserManager extends Manager
             $req = $getdb->prepare('SELECT * FROM user WHERE username = ?');
             $req->execute(array($username));
             $data = $req->fetch();
-            //if $data est ok tableau
+            
             $user = new User($data);
             
             return $user;
-            
         }else{
             throw new Exception('Mauvais identifiant ou mot de passe !');
         }
-        
     }
 
     public function getAdmins()
@@ -71,7 +64,6 @@ class UserManager extends Manager
         {
             $admins[] = new User($data);
         }
-
         return $admins;
     }
 }

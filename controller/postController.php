@@ -1,23 +1,17 @@
 <?php
 
-//require_once 'model/PostManager.php';
-//require_once 'model/CommentManager.php';
-//require_once 'view/View.php';
-
 class PostController extends Controller
 {
     function getPosts()
     {
         $postManager = new PostManager;
         $posts = $postManager->getPosts();
-        //var_dump($posts[0]);
+
         $userManager = new UserManager;
         $admins = $userManager->getAdmins();
 
         $view = new View('listPosts');
         $view->render(array('posts' => $posts, 'admins' => $admins));
-
-        //require 'view/listPostsView.php';
     }
 
     function getPostsPage($numPage)
@@ -29,15 +23,13 @@ class PostController extends Controller
         $nbPages = ceil($nbPosts / $nbPostsPage);
         $post1 = ($numPage - 1) * $nbPostsPage;
         $posts = $postManager->getPostsPage($post1, $nbPostsPage);
-        //var_dump($posts);
         $userManager = new UserManager;
         $admins = $userManager->getAdmins();
 
         $view = new View('listPosts');
         $view->render(array('posts' => $posts, 'admins' => $admins, 'nbPages' => $nbPages));
+    }  
 
-        //require 'view/listPostsView.php';
-    }    
     function getOnePost($getId, $postUp=null, $messageUp=null)
     {
         if (isset($getId) && $getId > 0){
@@ -55,12 +47,12 @@ class PostController extends Controller
 
             $view = new View('post');
             $view->render(array('post' => $post, 'comments' => $comments, 'admins' => $admins, 'postBB' => $postBB));
-            //require 'view/postView.php';
         }else{
             throw new Exception('Aucun id de post envoyé');
         }
 
     }
+
     function writePost($post=null, $message=null)
     {
         $userManager = new UserManager;
@@ -102,6 +94,7 @@ class PostController extends Controller
         }
 
     }
+
     function deletePost($getArray, $sessionArray)
     {
         if ($sessionArray['admin'] == 1){
@@ -120,6 +113,7 @@ class PostController extends Controller
             throw new Exception('Il faut être admin');
         }
     }
+
     function updatePost($getArray, $postArray, $sessionArray)
     {
         if ($sessionArray['admin'] == 1){
@@ -162,16 +156,15 @@ class PostController extends Controller
 
     private function pictureIsOk()
     {
-        // Testons si le fichier n'est pas trop gros
         if ($_FILES['picture']['size'] <= 1048576) {
-            // Testons si l'extension est autorisée
             $infosfichier = pathinfo($_FILES['picture']['name']);
             $extension_upload = $infosfichier['extension'];
             $extensions_autorisees = array('jpg', 'jpeg', 'png');
+
             if (in_array($extension_upload, $extensions_autorisees)) {
                 $postManager = new PostManager;
                 $posts = $postManager->getPosts();
-                // On peut valider le fichier et le stocker définitivement
+
                 $src = 'public/img/uploads/' . basename($posts[0]->id()) . '.' . $infosfichier['extension'];
                 move_uploaded_file($_FILES['picture']['tmp_name'], $src);
                 
@@ -187,5 +180,4 @@ class PostController extends Controller
             throw new Exception('Impossible d\'ajouter l\'image!');
         }
     }
-
 }

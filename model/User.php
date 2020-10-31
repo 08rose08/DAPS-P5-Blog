@@ -7,7 +7,7 @@ class User
             $_pass,
             $_admin;
 
-    public function __construct(array $data) //Qd je fais new Post(['title' => $_Post['title']]), va être appelé par addPost() 
+    public function __construct(array $data)
     {
         $this->hydrate($data);
     }
@@ -48,7 +48,7 @@ class User
 
     public function setId($id)
     {
-        $id = (int) $id; //Pourquoi pas is_int ?
+        $id = (int) $id;
         if ($id > 0)
         {
             $this->_id = $id;
@@ -62,7 +62,7 @@ class User
     }
     public function setPass($pass)
     {
-        if (is_string($pass)) //is_string ??
+        if (is_string($pass)) 
         {
             $this->_pass = $pass;
         }

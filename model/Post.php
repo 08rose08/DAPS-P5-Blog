@@ -11,7 +11,7 @@ class Post
             $_chapo,
             $_picture;
 
-    public function __construct(array $data) //Qd je fais new Post(['title' => $_Post['title']]), va être appelé par addPost() 
+    public function __construct(array $data)
     {
         $this->hydrate($data);
     }
@@ -67,7 +67,7 @@ class Post
 
     public function setId($id)
     {
-        $id = (int) $id; //Pourquoi pas is_int ?
+        $id = (int) $id;
         if ($id > 0)
         {
             $this->_id = $id;
@@ -96,17 +96,14 @@ class Post
     }
     public function setContent($content)
     {
-        if (is_string($content)) //is_string ??
+        if (is_string($content)) 
         {
             $this->_content = $content;
         }
     }
     public function setLast_update_date($last_update_date)
     {
-        //if () //if quoi ? is_date n'existe pas
-        //{
             $this->_last_update_date = $last_update_date;
-        //}
     }
     public function setChapo($chapo)
     {

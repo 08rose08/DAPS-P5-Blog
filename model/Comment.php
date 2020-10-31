@@ -9,7 +9,7 @@ class Comment
             $_content,
             $_creation_date;
 
-    public function __construct(array $data) //Qd je fais new Post(['title' => $_Post['title']]), va être appelé par addPost() 
+    public function __construct(array $data)
     {
         $this->hydrate($data);
     }
@@ -58,7 +58,7 @@ class Comment
 
     public function setId($id)
     {
-        $id = (int) $id; //Pourquoi pas is_int ?
+        $id = (int) $id;
         if ($id > 0)
         {
             $this->_id = $id;
@@ -88,16 +88,13 @@ class Comment
     }
     public function setContent($content)
     {
-        if (is_string($content)) //is_string ??
+        if (is_string($content)) 
         {
             $this->_content = $content;
         }
     }
     public function setCreation_date($creation_date)
     {
-        //if () //if quoi ? is_date n'existe pas
-        //{
-            $this->_creation_date = $creation_date;
-        //}
+        $this->_creation_date = $creation_date;
     }
 }

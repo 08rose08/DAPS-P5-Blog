@@ -10,7 +10,7 @@ class View
         $this->file ='view/' . $thing . 'View.php';
     }
 
-    function render($data=null) //=generer()
+    function render($data=null)
     {
         $content = $this->renderFile($this->file, $data);
         $view = $this->renderFile('view/template.php', array('title' => $this->title, 'page' => $this->page, 'content' => $content));

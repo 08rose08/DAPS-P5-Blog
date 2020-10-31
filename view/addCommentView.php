@@ -11,7 +11,7 @@
       </div>
 
       <div class="modal-body">
-        <form method="post" action="index.php?action=addComment&amp;id=<?= htmlspecialchars($_GET['id']) ?>">
+        <form method="post" action="index.php?action=addComment&amp;id=<?= $_GET['id'] ?>">
             <div class="form-group">
                 <label for="content">Commentaire</label>
                 <textarea class="form-control" name="content" id="content" rows="3" required data-validation-required-message="Veuillez écrire votre commentaire svp."></textarea>
