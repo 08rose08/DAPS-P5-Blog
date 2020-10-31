@@ -232,6 +232,7 @@
 
         <!-- Footer-->
         <footer class="footer bg-black small text-center text-white-50">
+            <div><a href="index.php?action=legal">Mentions légales</a></div>
             <div class="container">Copyright © ThePinkMuffin 2020</div>
             
         </footer>
