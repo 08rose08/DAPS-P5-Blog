@@ -14,6 +14,7 @@ class PostController extends Controller
         $view->render(array('posts' => $posts, 'admins' => $admins));
     }
 
+    
     function getPostsPage($numPage)
     {   
         if(empty($numPage)) {$numPage = 1;}
@@ -33,16 +34,16 @@ class PostController extends Controller
     function getOnePost($getId, $postUp=null, $messageUp=null)
     {
         if (isset($getId) && $getId > 0){
-
+            //need comments (under the post)
             $commentManager = new CommentManager;
             $comments = $commentManager->getComments($getId);
             
             $postManager = new PostManager;
             $post = $postManager->getOnePost($getId);
-            
+            //need admins as authors (updateForm)
             $userManager = new UserManager;
             $admins = $userManager->getAdmins();    
-
+            //'translate' <> into BBcode (for updateForm)
             $postBB = $this->switchBB($post);
 
             $view = new View('post');
@@ -65,7 +66,7 @@ class PostController extends Controller
     {
         if (!empty($postArray['id_author']) && !empty($postArray['title']) && !empty($postArray['content']) && !empty($postArray['chapo'])){
             $post = new Post($postArray);
-            
+            //check if the new Post is not empty
             if(empty($post->title())){
                 return $this->writePost($post, 'titre vide');
             }elseif(empty($post->chapo())){
@@ -104,6 +105,7 @@ class PostController extends Controller
             if ($affectedLines === false) {
                 throw new Exception('Impossible de supprimer le post!');
             }else{
+                // if picture, delete the picture in the uploads folder
                 if(!empty($post->picture())) {
                     unlink($post->picture());
                 }
@@ -123,6 +125,7 @@ class PostController extends Controller
                 $post->setId($getArray['id']);
                 $post->setId_author($sessionArray['id']);
                 
+                //check if the new object Post is not empty
                 if(empty($post->title())){
                     return $this->getOnePost($post->id(), $post, 'titre vide');
                 }elseif(empty($post->chapo())){
@@ -154,6 +157,7 @@ class PostController extends Controller
         }
     }
 
+    //check if the picture is ok (format, size) and save it 
     private function pictureIsOk()
     {
         if ($_FILES['picture']['size'] <= 1048576) {
