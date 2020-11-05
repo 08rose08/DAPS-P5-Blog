@@ -8,6 +8,7 @@ class UserManager extends Manager
             throw new Exception('Username already exists');
 
         }else{
+            //hash the password
             $passHash = password_hash($password, PASSWORD_DEFAULT);
             $data = array(
                 'username' => $username,
@@ -15,6 +16,7 @@ class UserManager extends Manager
             );
             $user = new User($data);
 
+            //add the user in the db
             $getdb = $this->dbConnect();
             $addUser = $getdb->prepare('INSERT INTO user VALUES (NULL, :username, :pass, 0)');
             $addUser->bindValue(':username', $user->username());
@@ -26,6 +28,7 @@ class UserManager extends Manager
         }
     }
 
+    //check if the username already exists in the database -> use in login and signup
     public function alreadyExists($username)
     {
         $getdb = $this->dbConnect();
@@ -55,6 +58,7 @@ class UserManager extends Manager
         }
     }
 
+    //Get the admins list (authors in forms)
     public function getAdmins()
     {   
         $admins = [];

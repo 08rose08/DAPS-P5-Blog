@@ -16,6 +16,7 @@ class UserController extends Controller
     public function signup($postArray)
     {
         if (isset($postArray['username']) &&  isset($postArray['password1']) && isset($postArray['password2'])){
+            // 2 passwords in the form and must be ==
             if ($postArray['password1'] != $postArray['password2']){
                 throw new Exception('Not the same password');
             }else{
@@ -40,6 +41,7 @@ class UserController extends Controller
             $userManager = new UserManager;
             $user = $userManager->login($postArray['username']);
             
+            //check the password with the hash
             $isPasswordCorrect = password_verify($postArray['password'], $user->pass());
 
             if (!$user) {
