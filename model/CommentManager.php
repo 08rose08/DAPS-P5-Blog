@@ -2,6 +2,7 @@
 
 class CommentManager extends Manager
 {
+    //Get valid comments -> for OnePost
     public function getComments($getId)
     {
         $comments = [];
@@ -28,6 +29,7 @@ class CommentManager extends Manager
         return $affectedLines;
     }
 
+    //Get the invalid (valid=0) comments ->for moderation
     public function getInvalidComments()
     {
         $comments = [];
