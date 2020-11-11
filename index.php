@@ -8,6 +8,7 @@ try {
         $controller = new IndexController;
         $controller->showIndex();
     }elseif (!empty($_GET['action'])){
+        //Check and format $_GET, $_POST, $_SESSION and return arrays
         if(empty($_POST)){ $_POST = NULL; }
         if(empty($_SESSION)){ $_SESSION = NULL; }
 
@@ -16,6 +17,7 @@ try {
         $postArray = $request->post();
         $sessionArray = $request->session();
 
+        // is login or is admin ?
         $admin = (isset($sessionArray['admin']) AND $sessionArray['admin'] == 1);
         $login = (isset($sessionArray['id']) AND isset($sessionArray['username']));
 

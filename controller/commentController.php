@@ -6,10 +6,12 @@ class CommentController extends Controller
     function addComment($getArray, $postArray, $sessionArray)
     {
         if (!empty($sessionArray['id']) && !empty($getArray['id']) && !empty($postArray['content'])){
+            //create a new object Comment
             $comment = new Comment($postArray);
             $comment->setId_post($getArray['id']);
             $comment->setId_author($sessionArray['id']);
 
+            //Send Comment to the manager
             $commentManager = new CommentManager;
             $affectedLines = $commentManager->addComment($comment); 
 
@@ -23,6 +25,7 @@ class CommentController extends Controller
         }
     }
 
+    //use in moderation
     public function getInvalidComments()
     {
         $commentManager = new CommentManager;
@@ -47,6 +50,7 @@ class CommentController extends Controller
             throw new Exception('Il faut être admin');
         }
     }
+
 
     public function validateComment($getArray, $sessionArray)
     {

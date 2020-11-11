@@ -3,6 +3,8 @@
 class PostManager extends Manager
 {
    //CRUD
+
+   //Get all posts
     public function getPosts()
     {
         $posts = [];
@@ -15,6 +17,7 @@ class PostManager extends Manager
         return $posts;  
     }
 
+    //Get how many posts there are in the db
     public function nbPosts()
     {
         $getdb = $this->dbConnect();
@@ -23,6 +26,7 @@ class PostManager extends Manager
         return $data['nb_posts'];
     }
 
+    //get the posts for one page
     public function getPostsPage($post1, $nbPostsPage)
     {
         $posts = [];
